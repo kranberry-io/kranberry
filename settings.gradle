@@ -1,0 +1,3 @@
+include ':wrapper'
+include ':sample-app'
+rootProject.name = "kranberry"
