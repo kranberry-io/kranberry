@@ -1,16 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: 'versions.gradle'
+
+android {
+    testBuildType "release"
+
+    compileSdkVersion project.compileApiVersion
+    buildToolsVersion project.toolsVersion
+
+    defaultConfig {
+        minSdkVersion minApiVersion
+        targetSdkVersion targetApiVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            debuggable true
+            getIsDefault().set(true)
+            matchingFallbacks = ['debug']
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    // filter buildType debug
+    variantFilter { variant ->
+        def buildType = variant.buildType.name
+        if (buildType == "debug") {
+            setIgnore(true)
+        }
+    }
+}
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.21"
+    apply from: rootProject.file("versions.gradle")
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
 }
 
@@ -21,6 +62,18 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    implementation "androidx.test.ext:junit:$androidXJunitVersion"
+    implementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinTestVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinTestVersion"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidXJunitVersion"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
+    androidTestImplementation "com.google.code.gson:gson:$gsonVersion"
 }
