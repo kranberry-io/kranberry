@@ -1,0 +1,2 @@
+package io.kranberry.logging
+
