@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.uiautomator.UiDevice
 import io.kranberry.environment.DeviceHandler
+import io.kranberry.environment.PropertyReader
 import io.kranberry.screeen.App
 import org.junit.Before
 import org.junit.Rule
@@ -31,5 +32,10 @@ class SampleTest {
     fun openGoogleChrome() {
         App(device)
                 .open()
+    }
+
+    @Test
+    fun name() {
+        PropertyReader().getProperty()
     }
 }
