@@ -21,8 +21,7 @@ object DeviceHandler {
     var reportHasHeader: Boolean = false
     var testClassName: String = ""
     var currentTestMethodName = "Test"
-    var currentTestClassName =  "TestClass"
-
+    var currentTestClassName = "TestClass"
 
     fun start(appPackage: String, clearData: Boolean = true): UiDevice {
         DeviceHandler.appPackage = appPackage

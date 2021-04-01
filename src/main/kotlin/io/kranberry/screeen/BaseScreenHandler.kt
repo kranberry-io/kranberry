@@ -15,7 +15,7 @@ open class Page(open val device: UiDevice) {
     val ANSI_GREY = "\u001B[39m"
 
     fun tapByIndex(index: Int): Boolean {
-        val element  = findElementByIndex(index)
+        val element = findElementByIndex(index)
         if (element.exists() && element.isEnabled) {
             element.click()
             return true
@@ -59,14 +59,14 @@ open class Page(open val device: UiDevice) {
         return false
     }
 
-    fun scrollToEnd() : Boolean {
+    fun scrollToEnd(): Boolean {
         val scrollable = UiScrollable(UiSelector().scrollable(true)
                 .instance(0))
         waitForElementAndDevice(scrollable)
         return scrollable.scrollToEnd(MAX_SEARCH_SWIPES)
     }
 
-    fun scrollToBeginning() : Boolean {
+    fun scrollToBeginning(): Boolean {
         val scrollable = UiScrollable(UiSelector().scrollable(true)
                 .instance(0))
         waitForElementAndDevice(scrollable)
@@ -95,7 +95,7 @@ open class Page(open val device: UiDevice) {
         return this
     }
 
-    private fun waitForElementAndDevice(element: UiObject, timeout : Long): Page {
+    private fun waitForElementAndDevice(element: UiObject, timeout: Long): Page {
         element.waitForExists(timeout)
         device.waitForIdle(timeout)
         return this
@@ -108,5 +108,4 @@ open class Page(open val device: UiDevice) {
     private fun findElementById(id: String): UiObject {
         return device.findObject(UiSelector().resourceId("$APP_PACKAGE:id/$id"))
     }
-
 }
