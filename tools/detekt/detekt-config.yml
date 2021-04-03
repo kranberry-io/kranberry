@@ -5,3 +5,7 @@ complexity:
     thresholdInInterfaces: 11
     thresholdInObjects: 11
     thresholdInEnums: 11
+
+style:
+  UnusedPrivateMember:
+    allowedNames: '(findElementByTextContains|findElementByText|findElementById)'
