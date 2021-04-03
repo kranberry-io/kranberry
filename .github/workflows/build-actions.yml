@@ -24,5 +24,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Run detekt check
+        run: make detekt
+
       - name: Build project
         run: make build
