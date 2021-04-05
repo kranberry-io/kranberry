@@ -1,6 +1,3 @@
 package io.kranberry.environment
 
-
-object AppHandler {
-
-}
+object AppHandler

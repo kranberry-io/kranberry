@@ -21,8 +21,7 @@ object DeviceHandler {
     var reportHasHeader: Boolean = false
     var testClassName: String = ""
     var currentTestMethodName = "Test"
-    var currentTestClassName =  "TestClass"
-
+    var currentTestClassName = "TestClass"
 
     fun start(appPackage: String, clearData: Boolean = true): UiDevice {
         DeviceHandler.appPackage = appPackage
@@ -84,12 +83,10 @@ object DeviceHandler {
 
     private fun startApp() {
         val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
-        val intent = context.packageManager.getLaunchIntentForPackage(APP_PACKAGE)
-        try {
-            intent!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        } catch (e: Exception) {
-            throw RuntimeException("You must have the app installed to run this test.")
-        }
+        val intent: Intent = context.packageManager.getLaunchIntentForPackage(APP_PACKAGE)
+            ?: throw IllegalStateException("You must have the app installed to run this test.")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
         context.startActivity(intent)
     }
 

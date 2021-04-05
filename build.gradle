@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: 'versions.gradle'
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 android {
     testBuildType "release"
@@ -52,6 +53,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     }
 }
 
@@ -76,4 +78,20 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidXJunitVersion"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
     androidTestImplementation "com.google.code.gson:gson:$gsonVersion"
+
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
 }
+
+detekt {
+    buildUponDefaultConfig = true
+    config = files("tools/detekt/detekt-config.yml")
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        txt.enabled = true
+        sarif.enabled = true
+    }
+}
+
+tasks.detekt.jvmTarget = "1.8"
