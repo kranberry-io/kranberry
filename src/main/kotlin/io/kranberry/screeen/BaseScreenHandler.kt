@@ -80,14 +80,6 @@ open class Page(open val device: UiDevice) {
         return device.findObjects(By.res(APP_PACKAGE, id)).size > 0
     }
 
-    private fun findElementByTextContains(text: String): UiObject {
-        return device.findObject(UiSelector().textContains(text))
-    }
-
-    private fun findElementByText(text: String): UiObject {
-        return device.findObject(UiSelector().text(text))
-    }
-
     private fun findElementByIndex(index: Int): UiObject {
         return device.findObject(UiSelector().index(index))
     }
@@ -105,9 +97,5 @@ open class Page(open val device: UiDevice) {
 
     private fun findElementByAccessibilityId(accessibilityId: String): UiObject {
         return device.findObject(UiSelector().descriptionContains(accessibilityId))
-    }
-
-    private fun findElementById(id: String): UiObject {
-        return device.findObject(UiSelector().resourceId("$APP_PACKAGE:id/$id"))
     }
 }
