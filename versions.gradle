@@ -11,8 +11,9 @@ ext {
     jacoco_version = "0.8.6"
     dependenciesAnalysisVersion = "0.69.0"
     proguardGradleVersion = "6.2.2"
-    androidToolsGradleVersion = "4.0.0"
+    androidToolsGradleVersion = "4.1.0"
     navigation_version = "2.2.2"
+    detekt_version = "1.16.0"
 
 
     // test dependencies versions

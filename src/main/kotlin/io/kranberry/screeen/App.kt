@@ -10,5 +10,4 @@ open class App(device: UiDevice) : Page(device) {
         DeviceHandler.start(APP_PACKAGE)
         return this
     }
-
 }

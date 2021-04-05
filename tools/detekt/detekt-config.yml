@@ -1,0 +1,8 @@
+complexity:
+  TooManyFunctions:
+    thresholdInFiles: 11
+    thresholdInClasses: 15
+    thresholdInInterfaces: 11
+    thresholdInObjects: 11
+    thresholdInEnums: 11
+
