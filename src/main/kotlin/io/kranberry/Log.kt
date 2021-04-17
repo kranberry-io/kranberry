@@ -26,7 +26,11 @@ object Log {
         print(msg, CYAN)
     }
 
-    private fun print(msg: String, color: Enum<Color>) {
-        Log.i(TAG, msg + color + RESET)
+    fun print(msg: String){
+        Log.i(TAG, msg)
+    }
+
+    private fun print(msg: String, color: Color) {
+        Log.i(TAG, color.ansi + msg + RESET.ansi)
     }
 }
