@@ -1,8 +1,8 @@
 package io.kranberry
 
-enum class Color (
+enum class Color(
     val ansi: String
-){
+) {
     BLACK("\u001b[30m"),
     RED("\u001b[31m"),
     GREEN("\u001b[32m"),

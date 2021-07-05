@@ -2,9 +2,12 @@ package io.kranberry
 
 import android.util.Log
 import io.kranberry.Color.*
+import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
+import io.kranberry.wrapper.BuildConfig
 
 object Log {
-    const val TAG = "KRANBERRY"
+    private  val TAG = testEnvironmentProperties.logTag
+    private val debugMode = BuildConfig.DEBUG
 
     fun info(msg: String) {
         print(msg, WHITE)
@@ -26,11 +29,18 @@ object Log {
         print(msg, CYAN)
     }
 
-    fun print(msg: String){
+    fun print(msg: String) {
         Log.i(TAG, msg)
     }
 
     private fun print(msg: String, color: Color) {
-        Log.i(TAG, color.ansi + msg + RESET.ansi)
+        when {
+            debugMode -> {
+                Log.i(TAG, msg)
+            }
+            else -> {
+                Log.i(TAG, color.ansi + msg + RESET.ansi)
+            }
+        }
     }
 }

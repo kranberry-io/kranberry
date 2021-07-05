@@ -1,4 +1,5 @@
 package io.kranberry.environment
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -7,27 +8,24 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import io.kranberry.environment.PropertyReader.getProperty
 import org.hamcrest.CoreMatchers
 
-const val APP_PACKAGE = "com.android.chrome"
-const val ANDROID_PACKAGE = "android"
-const val LOG_TAG = "EndToEndTestLog"
-const val TIMEOUT = 45000L
 
 object DeviceHandler {
 
+    val testEnvironmentProperties = getProperty()
+    val APP_PACKAGE = testEnvironmentProperties.appPackages[0]
+    val TIMEOUT = testEnvironmentProperties.defaultTimeout
+
     private lateinit var appPackage: String
-    var shouldDoLogin: Boolean = true
-    var reportHasHeader: Boolean = false
     var testClassName: String = ""
-    var currentTestMethodName = "Test"
-    var currentTestClassName = "TestClass"
 
     fun start(appPackage: String, clearData: Boolean = true): UiDevice {
         DeviceHandler.appPackage = appPackage
 
         val device = getDevice()
-        if (clearData) {
+        if (testEnvironmentProperties.clearApplicationDataBeforeTesting) {
             device.executeShellCommand("pm clear $appPackage")
         }
 
@@ -54,10 +52,6 @@ object DeviceHandler {
         return device
     }
 
-    fun shouldDoLogin(boolean: Boolean) {
-        shouldDoLogin = boolean
-    }
-
     fun testClassName(testClassName: String) {
         DeviceHandler.testClassName = testClassName
     }
@@ -68,7 +62,7 @@ object DeviceHandler {
 
     fun clearAppData() {
         InstrumentationRegistry.getInstrumentation()
-                .uiAutomation.executeShellCommand("pm clear $APP_PACKAGE")
+            .uiAutomation.executeShellCommand("pm clear $APP_PACKAGE")
     }
 
     fun getDevice(): UiDevice {
@@ -99,7 +93,7 @@ object DeviceHandler {
         intent.addCategory(Intent.CATEGORY_HOME)
 
         val packageManager =
-                InstrumentationRegistry.getInstrumentation().targetContext.packageManager
+            InstrumentationRegistry.getInstrumentation().targetContext.packageManager
         val resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         return resolveInfo?.activityInfo?.packageName
     }

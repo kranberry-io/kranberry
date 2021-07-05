@@ -1,20 +1,11 @@
-package io.kranberry.screeen
+package io.kranberry
 
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
-import androidx.test.uiautomator.UiScrollable
-import androidx.test.uiautomator.UiSelector
-import io.kranberry.environment.APP_PACKAGE
-import io.kranberry.environment.TIMEOUT
+import androidx.test.uiautomator.*
+import io.kranberry.environment.DeviceHandler.APP_PACKAGE
+import io.kranberry.environment.DeviceHandler.TIMEOUT
 
 const val MAX_SEARCH_SWIPES = 25
-const val MAX_PICK_DATE_TRIES = 11
-const val PROGRESS_BAR_TIMEOUT = 60000L
-const val ANSI_RESET = "\u001B[0m"
-const val ANSI_BLUE = "\u001B[34m"
-const val ANSI_MAGENTA = "\u001B[35m"
-const val ANSI_GREY = "\u001B[39m"
+
 open class Page(open val device: UiDevice) {
     fun tapByIndex(index: Int): Boolean {
         val element = findElementByIndex(index)
@@ -27,7 +18,7 @@ open class Page(open val device: UiDevice) {
 
     fun tapByClass(className: String): Boolean {
         val className: UiObject = device.findObject(
-                UiSelector().className(className)
+            UiSelector().className(className)
         )
         waitForElementAndDevice(className)
 
@@ -40,7 +31,7 @@ open class Page(open val device: UiDevice) {
 
     fun tapByTextContains(visibleText: String): Boolean {
         val text: UiObject = device.findObject(
-                UiSelector().textContains(visibleText)
+            UiSelector().textContains(visibleText)
         )
         waitForElementAndDevice(text)
 
@@ -62,15 +53,19 @@ open class Page(open val device: UiDevice) {
     }
 
     fun scrollToEnd(): Boolean {
-        val scrollable = UiScrollable(UiSelector().scrollable(true)
-                .instance(0))
+        val scrollable = UiScrollable(
+            UiSelector().scrollable(true)
+                .instance(0)
+        )
         waitForElementAndDevice(scrollable)
         return scrollable.scrollToEnd(MAX_SEARCH_SWIPES)
     }
 
     fun scrollToBeginning(): Boolean {
-        val scrollable = UiScrollable(UiSelector().scrollable(true)
-                .instance(0))
+        val scrollable = UiScrollable(
+            UiSelector().scrollable(true)
+                .instance(0)
+        )
         waitForElementAndDevice(scrollable)
         return scrollable.scrollToBeginning(MAX_SEARCH_SWIPES)
     }

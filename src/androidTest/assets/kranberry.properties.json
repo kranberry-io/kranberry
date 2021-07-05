@@ -1,0 +1,20 @@
+{
+  "default_timeout": 60000,
+  "clear_application_data_before_testing": true,
+  "skip_chrome_welcome_screen": true,
+  "page_load_timeout": 30000,
+  "disable_animations": true,
+  "app_packages": [
+    "com.android.chrome"
+  ],
+  "permissions_granted_to_device": [
+    "ACCESS_FINE_LOCATION",
+    "WRITE_EXTERNAL_STORAGE",
+    "READ_EXTERNAL_STORAGE",
+    "READ_CONTACTS",
+    "CAMERA"
+  ],
+  "progressbar_class": [
+    "android.widget.ProgressBar"
+  ]
+}
