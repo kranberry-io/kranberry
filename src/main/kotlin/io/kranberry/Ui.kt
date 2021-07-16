@@ -1,6 +1,10 @@
 package io.kranberry
 
-import androidx.test.uiautomator.*
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
 import io.kranberry.environment.DeviceHandler.APP_PACKAGE
 import io.kranberry.environment.DeviceHandler.TIMEOUT
 

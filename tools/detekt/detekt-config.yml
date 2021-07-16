@@ -1,8 +1,16 @@
 complexity:
   TooManyFunctions:
-    thresholdInFiles: 11
-    thresholdInClasses: 15
-    thresholdInInterfaces: 11
-    thresholdInObjects: 11
-    thresholdInEnums: 11
+    thresholdInFiles: 30
+    thresholdInClasses: 30
+    thresholdInInterfaces: 30
+    thresholdInObjects: 30
+    thresholdInEnums: 30
+naming:
+  ConstructorParameterNaming:
+    excludeClassPattern: 'TestEnvironmentProperties'
+exceptions:
+  TooGenericExceptionThrown:
+    active: false
+  SwallowedException:
+    active: false
 

@@ -2,6 +2,20 @@ package io.kranberry.environment
 
 import com.google.gson.annotations.SerializedName
 
+const val DEFAULT_TIMEOUT = 30000L
+const val PAGE_LOAD_TIMEOUT = 60000L
+const val MAX_SEARCH_SWIPES = 50
+const val SWIPE_DOWN_START_X = 300
+const val SWIPE_DOWN_START_Y = 400
+const val SWIPE_DOWN_END_X = 300
+const val SWIPE_DOWN_END_Y = 750
+const val SWIPE_DOWN_STEPS = 4
+const val SWIPE_UP_START_X = 192
+const val SWIPE_UP_START_Y = 724
+const val SWIPE_UP_END_X = 192
+const val SWIPE_UP_END_Y = 100
+const val SWIPE_UP_STEPS = 55
+
 data class TestEnvironmentProperties(
     @SerializedName("default_timeout") private val _defaultTimeout: Long?,
     @SerializedName("android_package") private val _androidPackage: String?,
@@ -18,7 +32,7 @@ data class TestEnvironmentProperties(
     @SerializedName("swipe_up_params") private val _swipeUpParams: List<Long>?
 ) {
     val defaultTimeout
-        get() = _defaultTimeout ?: 30000L
+        get() = _defaultTimeout ?: DEFAULT_TIMEOUT
 
     val androidPackage
         get() = _androidPackage ?: "android"
@@ -33,10 +47,10 @@ data class TestEnvironmentProperties(
         get() = _skipChromeWelcomeScreen ?: true
 
     val pageLoadTimeout
-        get() = _pageLoadTimeout ?: 60000L
+        get() = _pageLoadTimeout ?: PAGE_LOAD_TIMEOUT
 
     val maxSearchSwipes
-        get() = _maxSearchSwipes ?: 50
+        get() = _maxSearchSwipes ?: MAX_SEARCH_SWIPES
 
     val disableAnimations
         get() = _disableAnimations ?: true
@@ -57,8 +71,10 @@ data class TestEnvironmentProperties(
         get() = _progressbarClass ?: listOf("android.widget.ProgressBar")
 
     val swipeDownParams
-        get() = _swipeDownParams ?: listOf(300, 400, 300, 750, 4)
+        get() = _swipeDownParams ?: listOf(SWIPE_DOWN_START_X, SWIPE_DOWN_START_Y,
+            SWIPE_DOWN_END_X, SWIPE_DOWN_END_Y, SWIPE_DOWN_STEPS)
 
     val swipeUpParams
-        get() = _swipeUpParams ?: listOf(192, 724, 192, 100, 55)
+        get() = _swipeUpParams ?: listOf(SWIPE_UP_START_X, SWIPE_UP_START_Y,
+            SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS)
 }

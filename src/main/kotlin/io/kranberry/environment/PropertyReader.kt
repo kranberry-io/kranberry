@@ -3,6 +3,7 @@ package io.kranberry.environment
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.gson.Gson
 import java.io.FileInputStream
+import java.io.IOException
 
 object PropertyReader {
 
@@ -24,11 +25,11 @@ object PropertyReader {
                 .open(fileName)
                 .bufferedReader()
                 .readText()
-
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             throw RuntimeException(
                 "kranberry.json configuration file not found in /src/androidTest/assets path." +
-                        "For more information access: https://github.com/kranberry-io/kranberry#kranberry-properties-file"
+                        "For more information access: " +
+                        "https://github.com/kranberry-io/kranberry#kranberry-properties-file"
             )
         }
     }

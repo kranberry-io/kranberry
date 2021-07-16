@@ -11,7 +11,6 @@ import androidx.test.uiautomator.Until
 import io.kranberry.environment.PropertyReader.getProperty
 import org.hamcrest.CoreMatchers
 
-
 object DeviceHandler {
 
     val testEnvironmentProperties = getProperty()
@@ -21,7 +20,7 @@ object DeviceHandler {
     private lateinit var appPackage: String
     var testClassName: String = ""
 
-    fun start(appPackage: String, clearData: Boolean = true): UiDevice {
+    fun start(appPackage: String): UiDevice {
         DeviceHandler.appPackage = appPackage
 
         val device = getDevice()

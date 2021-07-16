@@ -1,12 +1,17 @@
 package io.kranberry
 
 import android.util.Log
-import io.kranberry.Color.*
+import io.kranberry.Color.WHITE
+import io.kranberry.Color.YELLOW
+import io.kranberry.Color.RED
+import io.kranberry.Color.GREEN
+import io.kranberry.Color.CYAN
+import io.kranberry.Color.RESET
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
 import io.kranberry.wrapper.BuildConfig
 
 object Log {
-    private  val TAG = testEnvironmentProperties.logTag
+    private val TAG = testEnvironmentProperties.logTag
     private val debugMode = BuildConfig.DEBUG
 
     fun info(msg: String) {
