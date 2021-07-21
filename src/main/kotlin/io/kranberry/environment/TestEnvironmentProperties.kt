@@ -26,7 +26,7 @@ data class TestEnvironmentProperties(
     @SerializedName("max_search_swipes") private val _maxSearchSwipes: Int?,
     @SerializedName("disable_animations") private val _disableAnimations: Boolean?,
     @SerializedName("app_packages") private val _appPackages: MutableList<String>?,
-    @SerializedName("permissions_granted_to_device") private val _permissionsGrantedToDevice: List<String>?,
+    @SerializedName("permissions_granted_to_device") private val _permissionsGrantedToDevice: MutableList<String>?,
     @SerializedName("progressbar_class") private val _progressbarClass: List<String>?,
     @SerializedName("swipe_down_params") private val _swipeDownParams: List<Long>?,
     @SerializedName("swipe_up_params") private val _swipeUpParams: List<Long>?

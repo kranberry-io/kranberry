@@ -3,15 +3,20 @@ package io.kranberry.environment
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import io.kranberry.environment.PropertyReader.getProperty
+import io.kranberry.wrapper.BuildConfig
 import org.hamcrest.CoreMatchers
 
 object DeviceHandler {
+
+    private val libraryPackageName = BuildConfig.LIBRARY_PACKAGE_NAME
 
     val testEnvironmentProperties = getProperty()
     val APP_PACKAGE = testEnvironmentProperties.appPackages[0]
@@ -49,6 +54,15 @@ object DeviceHandler {
         waitAppStart(device)
 
         return device
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun grantPermissionsToPackageList(packages: MutableList<String>, permissions: MutableList<String> ) {
+
+        InstrumentationRegistry
+            .getInstrumentation()
+            .uiAutomation
+            .grantRuntimePermission("", "")
     }
 
     fun testClassName(testClassName: String) {
