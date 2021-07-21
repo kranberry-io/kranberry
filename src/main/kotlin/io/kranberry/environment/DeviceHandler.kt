@@ -3,27 +3,20 @@ package io.kranberry.environment
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import io.kranberry.environment.PropertyReader.getProperty
-import io.kranberry.wrapper.BuildConfig
 import org.hamcrest.CoreMatchers
 
 object DeviceHandler {
-
-    private val libraryPackageName = BuildConfig.LIBRARY_PACKAGE_NAME
-
     val testEnvironmentProperties = getProperty()
     val APP_PACKAGE = testEnvironmentProperties.appPackages[0]
     val TIMEOUT = testEnvironmentProperties.defaultTimeout
 
     private lateinit var appPackage: String
-    var testClassName: String = ""
 
     fun start(appPackage: String): UiDevice {
         DeviceHandler.appPackage = appPackage
@@ -32,21 +25,8 @@ object DeviceHandler {
         if (testEnvironmentProperties.clearApplicationDataBeforeTesting) {
             device.executeShellCommand("pm clear $appPackage")
         }
-
-        device.executeShellCommand("settings put secure show_ime_with_hard_keyboard 0")
-        device.executeShellCommand("settings put global window_animation_scale 0")
-        device.executeShellCommand("settings put global transition_animation_scale 0")
-        device.executeShellCommand("settings put global animator_duration_scale 0")
-        device.executeShellCommand("pm grant net.test.cn.hml android.permission.ACCESS_FINE_LOCATION")
-        device.executeShellCommand("pm grant net.test.cn.hml android.permission.WRITE_EXTERNAL_STORAGE")
-        device.executeShellCommand("pm grant net.test.cn.hml android.permission.READ_EXTERNAL_STORAGE")
-        device.executeShellCommand("pm grant net.test.fv android.permission.ACCESS_FINE_LOCATION")
-        device.executeShellCommand("pm grant net.test.fv android.permission.WRITE_EXTERNAL_STORAGE")
-        device.executeShellCommand("pm grant net.test.fv android.permission.READ_EXTERNAL_STORAGE")
-        device.executeShellCommand("pm grant net.test.fv android.permission.CAMERA")
-        device.executeShellCommand("pm grant com.test.tests.test android.permission.ACCESS_FINE_LOCATION")
-        device.executeShellCommand("pm grant com.test.tests.test android.permission.WRITE_EXTERNAL_STORAGE")
-        device.executeShellCommand("pm grant com.test.tests.test android.permission.READ_EXTERNAL_STORAGE")
+        executeDeviceCommands(device)
+        grantAppsPermissions(device)
         device.pressHome()
 
         waitForLauncher(device)
@@ -56,26 +36,21 @@ object DeviceHandler {
         return device
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    fun grantPermissionsToPackageList(packages: MutableList<String>, permissions: MutableList<String> ) {
-
-        InstrumentationRegistry
-            .getInstrumentation()
-            .uiAutomation
-            .grantRuntimePermission("", "")
+    private fun executeDeviceCommands(device: UiDevice) {
+        device.executeShellCommand("settings put secure show_ime_with_hard_keyboard 0")
+        device.executeShellCommand("settings put global window_animation_scale 0")
+        device.executeShellCommand("settings put global transition_animation_scale 0")
+        device.executeShellCommand("settings put global animator_duration_scale 0")
     }
 
-    fun testClassName(testClassName: String) {
-        DeviceHandler.testClassName = testClassName
-    }
-
-    fun getPackage(): String {
-        return APP_PACKAGE
-    }
-
-    fun clearAppData() {
-        InstrumentationRegistry.getInstrumentation()
-            .uiAutomation.executeShellCommand("pm clear $APP_PACKAGE")
+    private fun grantAppsPermissions(device: UiDevice) {
+        testEnvironmentProperties.run {
+            appPackages.forEach { currentPackage ->
+                permissionsGrantedToDevice.forEach { permission ->
+                    device.executeShellCommand("pm grant $currentPackage $permission")
+                }
+            }
+        }
     }
 
     fun getDevice(): UiDevice {
