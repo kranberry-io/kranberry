@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: 'versions.gradle'
 apply plugin: "io.gitlab.arturbosch.detekt"
+apply from: "tools/publish/publish.gradle"
 
 android {
     testBuildType "release"
