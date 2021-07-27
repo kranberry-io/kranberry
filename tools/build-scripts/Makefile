@@ -8,4 +8,7 @@ build:
 
 ### PUBLISH ###
 publish:
-     ./gradlew publishReleasePublicationToSonatypeRepository
+	./gradlew publishReleasePublicationToSonatypeRepository
+
+close-staging-repo:
+	./gradlew closeAndReleaseSonatypeStagingRepository
