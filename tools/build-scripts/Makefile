@@ -5,3 +5,7 @@ detekt:
 ### BUILD AND INSTALL ###
 build:
 	./gradlew assemble
+
+### PUBLISH ###
+publish:
+     ./gradlew publishReleasePublicationToSonatypeRepository
