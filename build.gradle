@@ -1,9 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    apply from: rootProject.file("versions.gradle")
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+    }
+}
+
+plugins {
+    id("io.github.gradle-nexus.publish-plugin") version "$nexus_publish_version"
+    id("org.jetbrains.dokka") version "$dokka_version"
+}
+apply from: "${rootProject.projectDir}/tools/publish/publish-root.gradle"
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: 'versions.gradle'
 apply plugin: "io.gitlab.arturbosch.detekt"
-apply from: "tools/publish/publish.gradle"
+ext {
+    PUBLISH_GROUP_ID = 'io.github.kranberry-io'
+    PUBLISH_VERSION = '0.1'
+    PUBLISH_ARTIFACT_ID = 'kranberry'
+}
+
+apply from: "${rootProject.projectDir}/tools/publish/publish-module.gradle"
 
 android {
     testBuildType "release"
@@ -40,28 +76,6 @@ android {
         if (buildType == "debug") {
             setIgnore(true)
         }
-    }
-}
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    apply from: rootProject.file("versions.gradle")
-
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
     }
 }
 
