@@ -6,9 +6,12 @@ detekt:
 build:
 	./gradlew assemble
 
+generate-sources:
+	./gradlew androidSourcesJar javadocJar
+
 ### PUBLISH ###
 publish:
-	./gradlew publishReleasePublicationToSonatypeRepository
+	./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
 
 close-staging-repo:
 	./gradlew closeAndReleaseSonatypeStagingRepository
