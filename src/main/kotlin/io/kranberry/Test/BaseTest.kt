@@ -1,3 +1,5 @@
+package io.kranberry.Test
+
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.uiautomator.UiDevice
@@ -6,6 +8,7 @@ import io.kranberry.ScreenshotHandler
 import io.kranberry.TestRules
 import io.kranberry.environment.DeviceHandler.getDevice
 import org.junit.Before
+
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
