@@ -29,7 +29,10 @@ data class TestEnvironmentProperties(
     @SerializedName("permissions_granted_to_device") private val _permissionsGrantedToDevice: MutableList<String>?,
     @SerializedName("progressbar_class") private val _progressbarClass: List<String>?,
     @SerializedName("swipe_down_params") private val _swipeDownParams: List<Long>?,
-    @SerializedName("swipe_up_params") private val _swipeUpParams: List<Long>?
+    @SerializedName("swipe_up_params") private val _swipeUpParams: List<Long>?,
+    @SerializedName("test_class_prefix") private val _testClassPrefix: String?,
+    @SerializedName("print_colored_logs") private val _printColoredLogs: Boolean?
+
 ) {
     val defaultTimeout
         get() = _defaultTimeout ?: DEFAULT_TIMEOUT
@@ -77,4 +80,11 @@ data class TestEnvironmentProperties(
     val swipeUpParams
         get() = _swipeUpParams ?: listOf(SWIPE_UP_START_X, SWIPE_UP_START_Y,
             SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS)
+
+    val testClassPrefix
+        get() = _testClassPrefix ?: ""
+
+    val printColoredLogs
+        get() = _printColoredLogs ?: true
 }
+

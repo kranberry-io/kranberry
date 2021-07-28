@@ -16,5 +16,6 @@
   ],
   "progressbar_class": [
     "android.widget.ProgressBar"
-  ]
+  ],
+  "print_colored_logs": true
 }

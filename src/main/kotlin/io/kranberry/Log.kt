@@ -1,18 +1,12 @@
 package io.kranberry
 
 import android.util.Log
-import io.kranberry.Color.WHITE
-import io.kranberry.Color.YELLOW
-import io.kranberry.Color.RED
-import io.kranberry.Color.GREEN
-import io.kranberry.Color.CYAN
-import io.kranberry.Color.RESET
+import io.kranberry.Color.*
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
-import io.kranberry.wrapper.BuildConfig
 
 object Log {
-    private val TAG = testEnvironmentProperties.logTag
-    private val debugMode = BuildConfig.DEBUG
+    private val tag = testEnvironmentProperties.logTag
+    private val printColoredLogs = testEnvironmentProperties.printColoredLogs
 
     fun info(msg: String) {
         print(msg, WHITE)
@@ -34,18 +28,56 @@ object Log {
         print(msg, CYAN)
     }
 
-    fun print(msg: String) {
-        Log.i(TAG, msg)
+    fun startTest(currentTestClassName: String, currentTestMethodName: String ){
+        when {
+            printColoredLogs -> {
+                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
+                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
+                        "${YELLOW.ansi}Starting test!${RESET.ansi}")
+            }
+            else -> {
+                Log.i(tag, "$currentTestClassName | $currentTestMethodName: Starting test!")
+            }
+        }
+    }
+
+    fun testFailed(currentTestClassName: String, currentTestMethodName: String, e: Throwable? ){
+        when {
+            printColoredLogs -> {
+                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
+                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
+                        "${RED.ansi}The test failed because:${RESET.ansi}", e)
+            }
+            else -> {
+                Log.i(tag, "$currentTestClassName | " +
+                        "$currentTestMethodName: The test failed because:", e)
+            }
+        }
+    }
+
+    fun testPassed(currentTestClassName: String, currentTestMethodName: String ){
+        when {
+            printColoredLogs -> {
+                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
+                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
+                        "${GREEN.ansi}Test successfully executed!${RESET.ansi}")
+            }
+            else -> {
+                Log.i(tag, "$currentTestClassName | " +
+                        "$currentTestMethodName: Test successfully executed!")
+            }
+        }
     }
 
     private fun print(msg: String, color: Color) {
         when {
-            debugMode -> {
-                Log.i(TAG, msg)
+            printColoredLogs -> {
+                Log.i(tag, color.ansi + msg + RESET.ansi)
             }
             else -> {
-                Log.i(TAG, color.ansi + msg + RESET.ansi)
+                Log.i(tag, msg)
             }
         }
     }
+
 }
