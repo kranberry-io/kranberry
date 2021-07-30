@@ -3,16 +3,18 @@ package io.kranberry
 import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES
 import io.kranberry.environment.DeviceHandler
+import io.kranberry.environment.TestHandler.testClassName
 import java.io.File
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 object ScreenshotHandler {
 
     private var count: Int = 0
     private val device = DeviceHandler.getDevice()
-    //TODO private val date: String = now().format(DateTimeFormatter
-    //            .ofPattern("yyyy_MM_dd_HHmmss"))
-    private val date: String = "yyyy_MM_dd_HHmmss"
+    private val dateFormat = SimpleDateFormat("yyyy_MM_dd_HH:mm:ss")
+    private val now = Date()
+    private val date: String = dateFormat.format(now)
     private var currentTestCaseName = ""
     private var currentTestCaseId = ""
     private var currentTestResult = "PASSED"
@@ -25,7 +27,12 @@ object ScreenshotHandler {
     }
 
     fun getTestResult(): String {
-        return "$currentTestCaseId,$currentTestResult \n"
+        return when (currentTestCaseId) {
+            "" -> {
+                "$currentTestResult\n"
+            }
+            else -> "$currentTestCaseId,$currentTestResult\n"
+        }
     }
 
     fun takeScreenshot() {
@@ -52,13 +59,12 @@ object ScreenshotHandler {
 
     private fun getScreenshotName(): String = when (currentTestCaseName) {
         "" -> "${"Screenshot"}_${getCurrentTime()}.png"
-        //TODO  else -> "$testClassName-${normalize(currentTestCaseName)}.png"
-        else -> "testClassName-${normalize(currentTestCaseName)}.png"
+        else -> "$testClassName-${normalize(currentTestCaseName)}.png"
     }
 
     private fun getCurrentTime(): String {
-        //TODO return now().format(DateTimeFormatter.ofPattern("HHmmss"))
-        return "HHmmss"
+        val formatCurrentTime = SimpleDateFormat("HHmmss")
+        return formatCurrentTime.format(now)
     }
 
     private fun getScreenshotDevicePath(): File? {
