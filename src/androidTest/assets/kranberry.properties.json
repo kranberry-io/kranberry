@@ -17,5 +17,6 @@
   "progressbar_class": [
     "android.widget.ProgressBar"
   ],
-  "print_colored_logs": true
+  "print_colored_logs": true,
+  "test_class_prefix": "io.kranberry."
 }
