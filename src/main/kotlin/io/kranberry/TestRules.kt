@@ -64,9 +64,11 @@ open class TestRules() : TestWatcher() {
 
     private fun writeResult() {
         if(!reportHasHeader){
-            File(getExecutionScreenshotPath() + "/results.csv").appendText("CLASS,TEST_METHOD,RESULT\n")
+            File(getExecutionScreenshotPath() + "/results.csv")
+                .appendText("CLASS,TEST_METHOD,RESULT\n")
             reportHasHeader = true
         }
-        File(getExecutionScreenshotPath() + "/results.csv").appendText("$currentTestClassName,$currentTestMethodName," + getTestResult())
+        File(getExecutionScreenshotPath() + "/results.csv")
+            .appendText("$currentTestClassName,$currentTestMethodName," + getTestResult())
     }
 }
