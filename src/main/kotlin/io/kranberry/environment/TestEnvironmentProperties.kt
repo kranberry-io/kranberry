@@ -74,12 +74,16 @@ data class TestEnvironmentProperties(
         get() = _progressbarClass ?: listOf("android.widget.ProgressBar")
 
     val swipeDownParams
-        get() = _swipeDownParams ?: listOf(SWIPE_DOWN_START_X, SWIPE_DOWN_START_Y,
-            SWIPE_DOWN_END_X, SWIPE_DOWN_END_Y, SWIPE_DOWN_STEPS)
+        get() = _swipeDownParams ?: listOf(
+            SWIPE_DOWN_START_X, SWIPE_DOWN_START_Y,
+            SWIPE_DOWN_END_X, SWIPE_DOWN_END_Y, SWIPE_DOWN_STEPS
+        )
 
     val swipeUpParams
-        get() = _swipeUpParams ?: listOf(SWIPE_UP_START_X, SWIPE_UP_START_Y,
-            SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS)
+        get() = _swipeUpParams ?: listOf(
+            SWIPE_UP_START_X, SWIPE_UP_START_Y,
+            SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS
+        )
 
     val testClassPrefix
         get() = _testClassPrefix ?: ""
