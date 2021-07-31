@@ -10,9 +10,11 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import io.kranberry.Log
 import io.kranberry.environment.PropertyReader.getProperty
+import io.kranberry.environment.TestHandler.device
 import org.hamcrest.CoreMatchers
 
 object DeviceHandler {
+
     val testEnvironmentProperties = getProperty()
     val APP_PACKAGE = testEnvironmentProperties.appPackages[0]
     private val TIMEOUT = testEnvironmentProperties.defaultTimeout
@@ -20,10 +22,10 @@ object DeviceHandler {
     private lateinit var appPackage: String
 
     fun start(appPackage: String): UiDevice {
+
         Log.info("Starting the app: '$appPackage'")
         DeviceHandler.appPackage = appPackage
 
-        val device = getDevice()
         if (testEnvironmentProperties.clearApplicationDataBeforeTesting) {
             device.executeShellCommand("pm clear $appPackage")
         }
@@ -56,7 +58,7 @@ object DeviceHandler {
     }
 
     fun getDevice(): UiDevice {
-        return UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        return device
     }
 
     private fun waitForLauncher(device: UiDevice) {
