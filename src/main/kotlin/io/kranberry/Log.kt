@@ -3,13 +3,20 @@ package io.kranberry
 import android.util.Log
 import io.kranberry.Color.*
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
+import io.kranberry.environment.TestHandler.currentTestClassName
+import io.kranberry.environment.TestHandler.currentTestMethodName
+import io.kranberry.environment.TestHandler.failedRate
+import io.kranberry.environment.TestHandler.failedTestCount
+import io.kranberry.environment.TestHandler.passedRate
+import io.kranberry.environment.TestHandler.passedTestCount
+import io.kranberry.environment.TestHandler.totalTestCount
 
 object Log {
     private val tag = testEnvironmentProperties.logTag
     private val printColoredLogs = testEnvironmentProperties.printColoredLogs
 
     fun info(msg: String) {
-        print(msg, WHITE)
+        print(msg, RESET)
     }
 
     fun alert(msg: String) {
@@ -28,12 +35,13 @@ object Log {
         print(msg, CYAN)
     }
 
-    fun startTest(currentTestClassName: String, currentTestMethodName: String ){
+    fun startTest() {
         when {
             printColoredLogs -> {
-                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
-                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
-                        "${YELLOW.ansi}Starting test!${RESET.ansi}")
+                Log.i(
+                    tag, coloredTestLogPrefix() +
+                            "${YELLOW.ansi}Starting test!${RESET.ansi}"
+                )
             }
             else -> {
                 Log.i(tag, "$currentTestClassName | $currentTestMethodName: Starting test!")
@@ -41,38 +49,67 @@ object Log {
         }
     }
 
-    fun testFailed(currentTestClassName: String, currentTestMethodName: String, e: Throwable? ){
+    fun startClass() {
         when {
             printColoredLogs -> {
-                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
-                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
-                        "${RED.ansi}The test failed because:${RESET.ansi}", e)
+                Log.i(
+                    tag, coloredClassLogPrefix() +
+                            "${YELLOW.ansi}Starting test!${RESET.ansi}"
+                )
             }
             else -> {
-                Log.i(tag, "$currentTestClassName | " +
-                        "$currentTestMethodName: The test failed because:", e)
+                Log.i(tag, "$currentTestClassName | Starting test!")
             }
         }
     }
 
-    fun testPassed(currentTestClassName: String, currentTestMethodName: String ){
+    fun testFailed(e: Throwable?) {
         when {
             printColoredLogs -> {
-                Log.i(tag, "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
-                        " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} " +
-                        "${GREEN.ansi}Test successfully executed!${RESET.ansi}")
+                Log.i(
+                    tag, coloredTestLogPrefix() +
+                            "${RED.ansi}The test failed because:${RESET.ansi}", e
+                )
             }
             else -> {
-                Log.i(tag, "$currentTestClassName | " +
-                        "$currentTestMethodName: Test successfully executed!")
+                Log.i(
+                    tag, "$currentTestClassName | " +
+                            "$currentTestMethodName: The test failed because:", e
+                )
             }
         }
+    }
+
+    fun testPassed(currentTestClassName: String, currentTestMethodName: String) {
+        when {
+            printColoredLogs -> {
+                Log.i(
+                    tag, coloredTestLogPrefix() +
+                            "${GREEN.ansi}Test successfully executed!${RESET.ansi}"
+                )
+            }
+            else -> {
+                Log.i(
+                    tag, "$currentTestClassName | " +
+                            "$currentTestMethodName: Test successfully executed!"
+                )
+            }
+        }
+    }
+
+    private fun coloredTestLogPrefix(): String {
+        return "${BLUE.ansi}${currentTestClassName}${RESET.ansi}" +
+                " | ${MAGENTA.ansi}${currentTestMethodName}:${RESET.ansi} "
+    }
+
+    private fun coloredClassLogPrefix(): String {
+        return "${BLUE.ansi}${currentTestClassName}${RESET.ansi} | "
     }
 
     private fun print(msg: String, color: Color) {
         when {
             printColoredLogs -> {
-                Log.i(tag, color.ansi + msg + RESET.ansi)
+                Log.i(tag, coloredTestLogPrefix() + color.ansi + msg + RESET.ansi)
             }
             else -> {
                 Log.i(tag, msg)
@@ -80,4 +117,24 @@ object Log {
         }
     }
 
+    fun testSummary() {
+        when {
+            printColoredLogs -> {
+                Log.i(
+                    tag, "\n${BLUE.ansi}Execution Summary:${RESET.ansi}\n" +
+                            "Executed: $totalTestCount | " +
+                            "${GREEN.ansi}Passed: $passedTestCount ($passedRate%)${RESET.ansi} | " +
+                            "${RED.ansi}Failed: $failedTestCount ($failedRate%)${RESET.ansi}\n"
+                )
+            }
+            else -> {
+                Log.i(
+                    tag, "\nExecution Summary:\n" +
+                            "Executed: $totalTestCount | " +
+                            "Passed: $passedTestCount ($passedRate%) | " +
+                            "Failed: $failedTestCount ($failedRate%)\n"
+                )
+            }
+        }
+    }
 }
