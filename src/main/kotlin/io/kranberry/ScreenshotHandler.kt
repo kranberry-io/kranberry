@@ -3,6 +3,8 @@ package io.kranberry
 import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES
 import io.kranberry.environment.DeviceHandler
+import io.kranberry.environment.TestHandler.currentTestCaseId
+import io.kranberry.environment.TestHandler.currentTestResult
 import io.kranberry.environment.TestHandler.testClassName
 import java.io.File
 import java.text.SimpleDateFormat
@@ -16,8 +18,7 @@ object ScreenshotHandler {
     private val now = Date()
     private val date: String = dateFormat.format(now)
     private var currentTestCaseName = ""
-    private var currentTestCaseId = ""
-    private var currentTestResult = "PASSED"
+
 
     private const val screenshotScale = 1.0F
     private const val screenshotQuality = 20
@@ -37,24 +38,24 @@ object ScreenshotHandler {
 
     fun takeScreenshot() {
         device.waitForIdle()
-        device.takeScreenshot(File(getScreenshotDevicePath(), getScreenshotName()), screenshotScale, screenshotQuality)
+        device.takeScreenshot(
+            File(getScreenshotDevicePath(), getScreenshotName()),
+            screenshotScale,
+            screenshotQuality
+        )
     }
 
     fun takeScreenshot(screenshotName: String?) {
-        device.takeScreenshot(File(getScreenshotDevicePath(), "$screenshotName.png"), screenshotScale, screenshotQuality)
+        device.takeScreenshot(
+            File(getScreenshotDevicePath(), "$screenshotName.png"),
+            screenshotScale,
+            screenshotQuality
+        )
     }
 
     fun setScreenshotsName(testcaseName: String) {
         currentTestCaseName = testcaseName
         count = 0
-    }
-
-    fun testCaseId(testCaseId: String) {
-        currentTestCaseId = testCaseId
-    }
-
-    fun testResult(testResult: String) {
-        currentTestResult = testResult
     }
 
     private fun getScreenshotName(): String = when (currentTestCaseName) {
@@ -68,7 +69,8 @@ object ScreenshotHandler {
     }
 
     private fun getScreenshotDevicePath(): File? {
-        val deviceScreenshotsPath = File(getExecutionScreenshotPath() + "/${currentTestResult}/$currentTestCaseId/")
+        val deviceScreenshotsPath =
+            File(getExecutionScreenshotPath() + "/${currentTestResult}/$currentTestCaseId/")
         if (!deviceScreenshotsPath.exists()) deviceScreenshotsPath.mkdirs()
         return deviceScreenshotsPath
     }
@@ -78,7 +80,7 @@ object ScreenshotHandler {
         val replacement = "$1_$2"
         count++
         return testName
-                .replace(regex.toRegex(), replacement)
-                .toLowerCase() + "_" + count
+            .replace(regex.toRegex(), replacement)
+            .toLowerCase() + "_" + count
     }
 }
