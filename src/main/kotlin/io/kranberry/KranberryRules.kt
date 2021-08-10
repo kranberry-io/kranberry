@@ -2,23 +2,21 @@ package io.kranberry
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import io.kranberry.ScreenshotHandler.getExecutionScreenshotPath
-import io.kranberry.ScreenshotHandler.getTestResult
-import io.kranberry.ScreenshotHandler.setScreenshotsName
-import io.kranberry.ScreenshotHandler.takeScreenshot
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
 import io.kranberry.environment.TestHandler.currentTestClassName
 import io.kranberry.environment.TestHandler.currentTestMethodName
 import io.kranberry.environment.TestHandler.device
 import io.kranberry.environment.TestHandler.failedTestCount
 import io.kranberry.environment.TestHandler.passedTestCount
-import io.kranberry.environment.TestHandler.reportHasHeader
 import io.kranberry.environment.TestHandler.testClassName
 import io.kranberry.environment.TestHandler.testResult
 import io.kranberry.environment.TestHandler.updateSummary
+import io.kranberry.log.Log
+import io.kranberry.outputs.CsvHandler.writeCsvResult
+import io.kranberry.outputs.ScreenshotHandler.setScreenshotsName
+import io.kranberry.outputs.ScreenshotHandler.takeScreenshot
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import java.io.File
 
 open class KranberryRules : TestWatcher() {
     var testClassPrefix = testEnvironmentProperties.testClassPrefix
@@ -57,18 +55,8 @@ open class KranberryRules : TestWatcher() {
 
     override fun finished(description: Description?) {
         updateSummary()
-        writeResult()
-
+        writeCsvResult()
         Log.testSummary()
     }
 
-    private fun writeResult() {
-        if (!reportHasHeader) {
-            File(getExecutionScreenshotPath() + "/results.csv")
-                .appendText("TEST_CLASS,TEST_METHOD,RESULT\n")
-            reportHasHeader = true
-        }
-        File(getExecutionScreenshotPath() + "/results.csv")
-            .appendText("$currentTestClassName,$currentTestMethodName," + getTestResult())
-    }
 }

@@ -8,9 +8,9 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
-import io.kranberry.log.Log
 import io.kranberry.environment.PropertyReader.getProperty
 import io.kranberry.environment.TestHandler.device
+import io.kranberry.log.Log
 import org.hamcrest.CoreMatchers
 
 object DeviceHandler {

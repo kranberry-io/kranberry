@@ -1,7 +1,6 @@
 package io.kranberry.log
 
 import android.util.Log
-import io.kranberry.log.Color.*
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
 import io.kranberry.environment.TestHandler.currentTestClassName
 import io.kranberry.environment.TestHandler.currentTestMethodName
@@ -10,6 +9,7 @@ import io.kranberry.environment.TestHandler.failedTestCount
 import io.kranberry.environment.TestHandler.passedRate
 import io.kranberry.environment.TestHandler.passedTestCount
 import io.kranberry.environment.TestHandler.totalTestCount
+import io.kranberry.log.Color.*
 
 object Log {
     private val tag = testEnvironmentProperties.logTag
