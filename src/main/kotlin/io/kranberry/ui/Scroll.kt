@@ -2,7 +2,7 @@ package io.kranberry.ui
 
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
-import io.kranberry.Log
+import io.kranberry.log.Log
 
 fun BaseUi.scrollUntilText(visibleText: String): Boolean {
     val scrollable = UiScrollable(
