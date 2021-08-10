@@ -1,7 +1,7 @@
 package io.kranberry.ui
 
 import androidx.test.uiautomator.By
-import io.kranberry.Log
+import io.kranberry.log.Log
 
 /**
  * Verifies that the element is on screen immediately when called,

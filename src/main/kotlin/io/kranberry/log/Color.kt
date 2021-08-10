@@ -1,4 +1,4 @@
-package io.kranberry
+package io.kranberry.log
 
 enum class Color(
     val ansi: String

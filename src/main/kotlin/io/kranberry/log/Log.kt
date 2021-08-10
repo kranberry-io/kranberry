@@ -1,7 +1,7 @@
-package io.kranberry
+package io.kranberry.log
 
 import android.util.Log
-import io.kranberry.Color.*
+import io.kranberry.log.Color.*
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
 import io.kranberry.environment.TestHandler.currentTestClassName
 import io.kranberry.environment.TestHandler.currentTestMethodName

@@ -2,7 +2,7 @@ package io.kranberry.ui
 
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
-import io.kranberry.Log
+import io.kranberry.log.Log
 import org.junit.Assert.assertTrue
 
 /**

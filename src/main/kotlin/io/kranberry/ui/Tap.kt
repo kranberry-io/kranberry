@@ -3,7 +3,7 @@ package io.kranberry.ui
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
-import io.kranberry.Log
+import io.kranberry.log.Log
 
 
 /**

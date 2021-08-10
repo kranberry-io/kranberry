@@ -1,7 +1,7 @@
 package io.kranberry.ui
 
 import androidx.test.uiautomator.By
-import io.kranberry.Log
+import io.kranberry.log.Log
 
 fun BaseUi.swipeUpUntilText(text: String): Boolean {
     Log.message("Scrolling up until the text: $text")

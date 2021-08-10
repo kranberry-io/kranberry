@@ -1,6 +1,6 @@
 package io.kranberry.ui
 
-import io.kranberry.Log
+import io.kranberry.log.Log
 
 fun BaseUi.inputTextById(id: String, text: String): Boolean {
     val input = findElementById(id)
