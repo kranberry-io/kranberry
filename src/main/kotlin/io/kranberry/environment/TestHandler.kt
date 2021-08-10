@@ -1,6 +1,8 @@
 package io.kranberry.environment
 
 import androidx.test.uiautomator.UiDevice
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.round
 
 object TestHandler {
@@ -21,6 +23,10 @@ object TestHandler {
 
     var reportHasHeader: Boolean = false
 
+    private val dateFormat = SimpleDateFormat("yyyy_MM_dd_HHmmss")
+    private val now = Date()
+    val date: String = dateFormat.format(now)
+
 
     fun testClassName(testClassName: String) {
         this.testClassName = testClassName
@@ -39,5 +45,10 @@ object TestHandler {
 
     fun testResult(testResult: String) {
         currentTestResult = testResult
+    }
+
+    fun getCurrentTime(): String {
+        val formatCurrentTime = SimpleDateFormat("HHmmss")
+        return formatCurrentTime.format(now)
     }
 }
