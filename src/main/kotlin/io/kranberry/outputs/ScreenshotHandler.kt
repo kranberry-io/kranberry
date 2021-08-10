@@ -1,22 +1,19 @@
-package io.kranberry
+package io.kranberry.outputs
 
 import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES
 import io.kranberry.environment.DeviceHandler
 import io.kranberry.environment.TestHandler.currentTestCaseId
 import io.kranberry.environment.TestHandler.currentTestResult
+import io.kranberry.environment.TestHandler.date
+import io.kranberry.environment.TestHandler.getCurrentTime
 import io.kranberry.environment.TestHandler.testClassName
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 object ScreenshotHandler {
 
     private var count: Int = 0
     private val device = DeviceHandler.getDevice()
-    private val dateFormat = SimpleDateFormat("yyyy_MM_dd_HH:mm:ss")
-    private val now = Date()
-    private val date: String = dateFormat.format(now)
     private var currentTestCaseName = ""
 
 
@@ -24,7 +21,7 @@ object ScreenshotHandler {
     private const val screenshotQuality = 20
 
     fun getExecutionScreenshotPath(): String {
-        return Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath + "/Screenshots/${date}"
+        return Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath + "/Screenshots/$date"
     }
 
     fun getTestResult(): String {
@@ -63,12 +60,7 @@ object ScreenshotHandler {
         else -> "$testClassName-${normalize(currentTestCaseName)}.png"
     }
 
-    private fun getCurrentTime(): String {
-        val formatCurrentTime = SimpleDateFormat("HHmmss")
-        return formatCurrentTime.format(now)
-    }
-
-    private fun getScreenshotDevicePath(): File? {
+    private fun getScreenshotDevicePath(): File {
         val deviceScreenshotsPath =
             File(getExecutionScreenshotPath() + "/${currentTestResult}/$currentTestCaseId/")
         if (!deviceScreenshotsPath.exists()) deviceScreenshotsPath.mkdirs()
