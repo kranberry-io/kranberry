@@ -35,15 +35,15 @@ fun BaseUi.elementIsPresentById(id: String): Boolean {
  * to do with the result of it (fail the test or try again, for example)
  */
 fun BaseUi.elementIsPresentByTextContains(text: String): Boolean {
-    Log.message("Trying to find some element that contains part of the text '$text'")
+    Log.info("Trying to find some element that contains part of the text '$text'")
 
     val elementIsPresent = device.findObjects(By.textContains(text)).size > 0
 
     when {
         elementIsPresent -> {
-            Log.message("'$text' has been found")
+            Log.info("'$text' has been found")
         }
-        else -> Log.message("'$text' not found")
+        else -> Log.info("'$text' not found")
     }
     return elementIsPresent
 }
