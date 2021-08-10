@@ -81,18 +81,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
     implementation "androidx.test.ext:junit:$androidXJunitVersion"
-    implementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinTestVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinTestVersion"
 
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
-    androidTestImplementation "androidx.test.ext:junit:$androidXJunitVersion"
-    androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
-    androidTestImplementation "com.google.code.gson:gson:$gsonVersion"
+    api "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    api "androidx.test.ext:junit:$androidXJunitVersion"
+    api "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
+    api "com.google.code.gson:gson:$gsonVersion"
 
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
 }
