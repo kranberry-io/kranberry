@@ -1,7 +1,7 @@
 package io.kranberry
 
 import androidx.test.uiautomator.UiDevice
-import io.kranberry.ScreenshotHandler.takeScreenshot
+import io.kranberry.outputs.ScreenshotHandler.takeScreenshot
 import io.kranberry.environment.DeviceHandler
 import io.kranberry.environment.DeviceHandler.APP_PACKAGE
 import io.kranberry.ui.BaseUi
