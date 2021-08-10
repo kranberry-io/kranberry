@@ -35,7 +35,7 @@ apply from: 'versions.gradle'
 apply plugin: "io.gitlab.arturbosch.detekt"
 ext {
     PUBLISH_GROUP_ID = 'io.github.kranberry-io'
-    PUBLISH_VERSION = '0.3-alpha'
+    PUBLISH_VERSION = '0.4-alpha'
     PUBLISH_ARTIFACT_ID = 'kranberry'
 }
 
