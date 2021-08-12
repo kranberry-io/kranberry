@@ -11,7 +11,10 @@ import androidx.test.uiautomator.Until
 import io.kranberry.environment.PropertyReader.getProperty
 import io.kranberry.environment.TestHandler.device
 import io.kranberry.log.Log
+import io.kranberry.outputs.CsvHandler.getCsvDevicePath
+import io.kranberry.outputs.ScreenshotHandler.getScreenshotDevicePath
 import org.hamcrest.CoreMatchers
+import java.io.File
 
 object DeviceHandler {
 
@@ -22,22 +25,27 @@ object DeviceHandler {
     private lateinit var appPackage: String
 
     fun start(appPackage: String): UiDevice {
-
+        //clearApplicationData(appPackage)
         Log.info("Starting the app: '$appPackage'")
         DeviceHandler.appPackage = appPackage
 
-        if (testEnvironmentProperties.clearApplicationDataBeforeTesting) {
-            device.executeShellCommand("pm clear $appPackage")
-        }
-        executeDeviceCommands(device)
         grantAppsPermissions(device)
+        executeDeviceCommands(device)
         device.pressHome()
 
         waitForLauncher(device)
         startApp()
         waitAppStart(device)
-
+        createDevicePaths()
         return device
+    }
+
+    private fun clearApplicationData(appPackage: String){
+        when {
+            testEnvironmentProperties.clearApplicationDataBeforeTesting -> {
+                device.executeShellCommand("pm clear $appPackage")
+            }
+        }
     }
 
     private fun executeDeviceCommands(device: UiDevice) {
@@ -45,6 +53,8 @@ object DeviceHandler {
         device.executeShellCommand("settings put global window_animation_scale 0")
         device.executeShellCommand("settings put global transition_animation_scale 0")
         device.executeShellCommand("settings put global animator_duration_scale 0")
+
+
     }
 
     private fun grantAppsPermissions(device: UiDevice) {
@@ -88,5 +98,15 @@ object DeviceHandler {
             InstrumentationRegistry.getInstrumentation().targetContext.packageManager
         val resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         return resolveInfo?.activityInfo?.packageName
+    }
+
+    private fun createDevicePaths(): Boolean {
+        val csvPath = getCsvDevicePath()
+        val screenShotPath = getScreenshotDevicePath().toString()
+
+        Log.alert("CSV PATH: ${File(csvPath).exists()}")
+        Log.alert("SCREENSHOT PATH: ${File(screenShotPath).exists()}")
+
+        return File(csvPath).exists() && File(screenShotPath).exists()
     }
 }
