@@ -12,9 +12,6 @@ if (secretPropsFile.exists()) {
     new FileInputStream(secretPropsFile).withCloseable { is -> p.load(is) }
     p.each { name, value ->
         ext[name] = value
-        project.logger.lifecycle('value from properties: ')
-        project.logger.lifecycle(name)
-        project.logger.lifecycle(value)
     }
 } else {
     // Use system environment variables

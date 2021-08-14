@@ -1,11 +1,6 @@
 package io.kranberry.outputs
 
-import android.app.Instrumentation
-import android.content.Context
-import android.os.Build
 import android.os.Environment
-import android.os.Environment.DIRECTORY_PICTURES
-import androidx.annotation.RequiresApi
 import androidx.test.platform.app.InstrumentationRegistry
 import io.kranberry.environment.TestHandler
 import io.kranberry.environment.TestHandler.date
@@ -18,19 +13,29 @@ object CsvHandler {
     private const val csvFileName = "/results.csv"
 
     private fun getExecutionCsvPath(): String {
-        return Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath +
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        Log.info("External files dir for app: " +
+                "${context.externalMediaDirs.firstOrNull()?.absolutePath}")
+        Log.info("External storage state: " +
+                Environment.getExternalStorageState(context.externalMediaDirs.firstOrNull())
+        )
+        val csvPath = context.externalMediaDirs.firstOrNull()?.absolutePath
+
+        Log.info("CSV path: $csvPath")
+        return (csvPath ?:
+                throw IllegalStateException("It was not possible to access apps external files dir")) +
                 "/Screenshots/$date"
     }
 
     fun getCsvDevicePath(): String {
-
-        val deviceCsvPath: File =
+        val deviceCsvPath =
             File(getExecutionCsvPath())
         when {
             !deviceCsvPath.exists() -> {
                 Log.alert("${InstrumentationRegistry
                     .getInstrumentation().context}")
-                deviceCsvPath.mkdirs()}
+                deviceCsvPath.mkdirs()
+            }
         }
         return deviceCsvPath.toString()
     }

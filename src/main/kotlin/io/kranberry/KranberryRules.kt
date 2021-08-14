@@ -29,7 +29,6 @@ open class KranberryRules : TestWatcher() {
         testResult("FAILED")
         takeScreenshot()
         Log.testFailed(e)
-
     }
 
     override fun starting(description: Description?) {
@@ -58,5 +57,4 @@ open class KranberryRules : TestWatcher() {
         writeCsvResult()
         Log.testSummary()
     }
-
 }

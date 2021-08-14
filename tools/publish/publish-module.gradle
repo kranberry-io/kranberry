@@ -68,8 +68,6 @@ afterEvaluate {
                         }
                     }
 
-                    // Version control info - if you're using GitHub, follow the
-                    // format as seen here
                     scm {
                         connection = 'scm:git:github.com/kranberry-io/kranberry.git'
                         developerConnection = 'scm:git:ssh://github.com/kranberry-io/kranberry.git'

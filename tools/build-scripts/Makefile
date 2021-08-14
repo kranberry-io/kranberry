@@ -2,9 +2,12 @@
 detekt:
 	./gradlew detekt
 
-### BUILD AND INSTALL ###
+### BUILD ###
 build:
 	./gradlew assemble
+
+buildAndroidTest:
+	./gradlew assembleAndroidTest
 
 generate-sources:
 	./gradlew androidSourcesJar javadocJar
