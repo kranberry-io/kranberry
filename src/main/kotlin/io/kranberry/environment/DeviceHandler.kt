@@ -28,7 +28,6 @@ object DeviceHandler {
         Log.info("Starting the app: '$appPackage'")
         DeviceHandler.appPackage = appPackage
 
-        grantAppsPermissions(device)
         executeDeviceCommands(device)
         device.pressHome()
 
@@ -52,16 +51,6 @@ object DeviceHandler {
         device.executeShellCommand("settings put global window_animation_scale 0")
         device.executeShellCommand("settings put global transition_animation_scale 0")
         device.executeShellCommand("settings put global animator_duration_scale 0")
-    }
-
-    private fun grantAppsPermissions(device: UiDevice) {
-        testEnvironmentProperties.run {
-            appPackages.forEach { currentPackage ->
-                permissionsGrantedToDevice.forEach { permission ->
-                    device.executeShellCommand("pm grant $currentPackage $permission")
-                }
-            }
-        }
     }
 
     fun getDevice(): UiDevice {
