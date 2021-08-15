@@ -1,0 +1,10 @@
+description = "Gradle Command to run Kranberry tests on a given App Package"
+def ERROR = 1
+task runKranberryTests(type:Exec) {
+    workingDir 'tools/build-scripts'
+
+    if (!project.hasProperty("package") || !project.hasProperty("testPackage")) {
+        return ERROR
+    }
+    commandLine './execute-tests.sh', project.getProperty("package"), project.getProperty("testPackage")
+}

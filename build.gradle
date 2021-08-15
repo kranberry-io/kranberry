@@ -31,8 +31,9 @@ allprojects {
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: 'versions.gradle'
+apply from: rootProject.file("versions.gradle")
 apply plugin: "io.gitlab.arturbosch.detekt"
+apply from: rootProject.file("tools/run-tests.gradle")
 ext {
     PUBLISH_GROUP_ID = 'io.github.kranberry-io'
     PUBLISH_VERSION = '0.6-alpha'
