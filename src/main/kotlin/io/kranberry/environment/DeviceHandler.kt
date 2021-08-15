@@ -98,6 +98,6 @@ object DeviceHandler {
         val testsOutputsPath = context.externalMediaDirs.firstOrNull()?.absolutePath
         return (testsOutputsPath
             ?: throw IllegalStateException("It was not possible to access apps external files dir")) +
-                "/${date}"
+                "/kranberryTestsOutputs/${date}"
     }
 }

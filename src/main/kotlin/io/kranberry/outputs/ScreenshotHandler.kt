@@ -17,7 +17,7 @@ object ScreenshotHandler {
 
     private const val screenshotScale = 1.0F
     private const val screenshotQuality = 20
-    private const val screenshotPath = "/Screenshots"
+    private const val screenshotPath = "/screenshots"
 
 
     private fun getExecutionScreenshotPath(): String {

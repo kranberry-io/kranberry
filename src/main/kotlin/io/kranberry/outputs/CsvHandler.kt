@@ -7,7 +7,7 @@ import java.io.File
 
 object CsvHandler {
 
-    private const val csvFileName = "/results.csv"
+    private const val csvFileName = "csv/results.csv"
 
     private fun getExecutionCsvPath(): String {
         return getTestsOutputsDevicePath() + csvFileName
