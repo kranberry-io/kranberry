@@ -9,6 +9,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import io.kranberry.environment.PropertyReader.getProperty
+import io.kranberry.environment.TestHandler.date
 import io.kranberry.environment.TestHandler.device
 import io.kranberry.log.Log
 import io.kranberry.outputs.CsvHandler.getCsvDevicePath
@@ -38,7 +39,7 @@ object DeviceHandler {
         return device
     }
 
-    private fun clearApplicationData(appPackage: String){
+    private fun clearApplicationData(appPackage: String) {
         when {
             testEnvironmentProperties.clearApplicationDataBeforeTesting -> {
                 device.executeShellCommand("pm clear $appPackage")
@@ -94,5 +95,13 @@ object DeviceHandler {
         Log.alert("SCREENSHOT PATH: ${File(screenShotPath).exists()}")
 
         return File(csvPath).exists() && File(screenShotPath).exists()
+    }
+
+    fun getTestsOutputsDevicePath(): String {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val testsOutputsPath = context.externalMediaDirs.firstOrNull()?.absolutePath
+        return (testsOutputsPath
+            ?: throw IllegalStateException("It was not possible to access apps external files dir")) +
+                "/${date}"
     }
 }
