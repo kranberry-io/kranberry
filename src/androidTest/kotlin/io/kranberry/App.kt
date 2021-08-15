@@ -13,7 +13,7 @@ open class App(device: UiDevice) : BaseUi(device) {
     open fun open(): App {
         DeviceHandler.start(APP_PACKAGE)
         takeScreenshot()
-        assertTrue(elementIsPresentByTextContains("Welcome to Chrome"))
+        assertTrue(elementIsPresentByTextContains("Display"))
         return this
     }
 }

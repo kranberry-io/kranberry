@@ -17,7 +17,7 @@ class SampleTest {
     val testRule = KranberryRules()
 
     @Test
-    fun openGoogleChrome() {
+    fun openDeviceSettings() {
         App(device)
                 .open()
     }
