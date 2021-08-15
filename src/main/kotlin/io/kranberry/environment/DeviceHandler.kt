@@ -90,10 +90,6 @@ object DeviceHandler {
     private fun createDevicePaths(): Boolean {
         val csvPath = getCsvDevicePath()
         val screenShotPath = getScreenshotDevicePath().toString()
-
-        Log.alert("CSV PATH: ${File(csvPath).exists()}")
-        Log.alert("SCREENSHOT PATH: ${File(screenShotPath).exists()}")
-
         return File(csvPath).exists() && File(screenShotPath).exists()
     }
 

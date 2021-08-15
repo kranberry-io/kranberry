@@ -1,15 +1,11 @@
 package io.kranberry.outputs
 
-import android.os.Environment
-import android.os.Environment.DIRECTORY_PICTURES
-import androidx.test.platform.app.InstrumentationRegistry
 import io.kranberry.environment.DeviceHandler
+import io.kranberry.environment.DeviceHandler.getTestsOutputsDevicePath
 import io.kranberry.environment.TestHandler.currentTestCaseId
 import io.kranberry.environment.TestHandler.currentTestResult
-import io.kranberry.environment.TestHandler.date
 import io.kranberry.environment.TestHandler.getCurrentTime
 import io.kranberry.environment.TestHandler.testClassName
-import io.kranberry.log.Log
 import java.io.File
 
 object ScreenshotHandler {
@@ -21,9 +17,11 @@ object ScreenshotHandler {
 
     private const val screenshotScale = 1.0F
     private const val screenshotQuality = 20
+    private const val screenshotPath = "/Screenshots"
+
 
     private fun getExecutionScreenshotPath(): String {
-        return Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath + "/Screenshots/$date"
+        return getTestsOutputsDevicePath() + screenshotPath
     }
 
     fun getTestResult(): String {
@@ -65,9 +63,6 @@ object ScreenshotHandler {
     fun getScreenshotDevicePath(): File {
         val deviceScreenshotsPath =
             File(getExecutionScreenshotPath() + "/${currentTestResult}/$currentTestCaseId/")
-        //TODO REMOVE IT
-        Log.alert("${InstrumentationRegistry.getInstrumentation().context}")
-
         if (!deviceScreenshotsPath.exists()) deviceScreenshotsPath.mkdirs()
         return deviceScreenshotsPath
     }
