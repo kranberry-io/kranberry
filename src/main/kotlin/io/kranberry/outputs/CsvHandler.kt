@@ -2,15 +2,17 @@ package io.kranberry.outputs
 
 import io.kranberry.environment.DeviceHandler.getTestsOutputsDevicePath
 import io.kranberry.environment.TestHandler
+import io.kranberry.log.Log
 import io.kranberry.outputs.ScreenshotHandler.getTestResult
 import java.io.File
 
 object CsvHandler {
 
-    private const val csvFileName = "csv/results.csv"
+    private const val csvFolderName = "/csv"
+    private const val csvFileName = "/results.csv"
 
     private fun getExecutionCsvPath(): String {
-        return getTestsOutputsDevicePath() + csvFileName
+        return getTestsOutputsDevicePath() + csvFolderName
     }
 
     fun getCsvDevicePath(): String {
@@ -25,7 +27,9 @@ object CsvHandler {
     }
 
     private fun csvResultFile(): File {
-        return File("${getCsvDevicePath()}$csvFileName")
+        val csvFilePath = getCsvDevicePath() + csvFileName
+        Log.info("CSV File Path: '$csvFilePath'")
+        return File(csvFilePath)
     }
 
     fun writeCsvResult() {

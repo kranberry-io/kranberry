@@ -1,4 +1,5 @@
-#adb logcat *:S KRANBERRY_LOG:V & LOGCAT_PID=$$!;
+adb shell logcat -b all -c
+adb logcat *:S KRANBERRY_LOG:V & LOGCAT_PID=$$!;
 
 RESULT=$(adb shell "am instrument -w -e package $1 $2/androidx.test.runner.AndroidJUnitRunner; printf $?" | tail -1);
 echo "Result running tests: ${RESULT}" ;

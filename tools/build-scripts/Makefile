@@ -21,11 +21,7 @@ close-staging-repo:
 
 ### RUN UI TESTS ###
 test:
-	@adb logcat *:S KRANBERRY_LOG:V & LOGCAT_PID=$$!; \
-	TERM=dumb ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=io.kranberry.SampleTest; \
-	RESULT=$$?; \
-	if [ -n "$$LOGCAT_PID" ]; then kill $$LOGCAT_PID; fi; \
-	exit $$RESULT
+	tools/build-scripts/execute-tests.sh
 
 copy-screenshots:
 	@adb pull /storage/emulated/0/Pictures/Screenshots

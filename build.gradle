@@ -1,17 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     apply from: rootProject.file("versions.gradle")
+    apply from: "${rootProject.projectDir}/tools/lib-version.gradle"
 
     repositories {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url = uri("local-plugin-repository")
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+        classpath "io.github.kranberry-io:runtests:$PUBLISH_VERSION"
     }
 }
 
@@ -25,6 +30,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url = uri("local-plugin-repository")
+        }
     }
 }
 
@@ -33,14 +41,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: rootProject.file("versions.gradle")
 apply plugin: "io.gitlab.arturbosch.detekt"
-apply from: rootProject.file("tools/run-tests.gradle")
-ext {
-    PUBLISH_GROUP_ID = 'io.github.kranberry-io'
-    PUBLISH_VERSION = '0.6-alpha'
-    PUBLISH_ARTIFACT_ID = 'kranberry'
-}
-
+apply plugin: "io.github.kranberry-io.runtests"
 apply from: "${rootProject.projectDir}/tools/publish/publish-module.gradle"
+
+kranberryTests {
+    packageName = "io.kranberry"
+    packageTests = "io.kranberry.wrapper.test"
+    androidTestApkOutputPath = "build/outputs/apk/androidTest/release/kranberry-release-androidTest.apk"
+    testsRunner = "androidx.test.runner.AndroidJUnitRunner"
+}
 
 android {
     testBuildType "release"

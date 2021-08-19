@@ -29,6 +29,7 @@ object DeviceHandler {
         Log.info("Starting the app: '$appPackage'")
         DeviceHandler.appPackage = appPackage
 
+        grantAppsPermissions(device)
         executeDeviceCommands(device)
         device.pressHome()
 
@@ -43,6 +44,16 @@ object DeviceHandler {
         when {
             testEnvironmentProperties.clearApplicationDataBeforeTesting -> {
                 device.executeShellCommand("pm clear $appPackage")
+            }
+        }
+    }
+
+    private fun grantAppsPermissions(device: UiDevice) {
+        testEnvironmentProperties.run {
+            appPackages.forEach { currentPackage ->
+                permissionsGrantedToDevice.forEach { permission ->
+                    device.executeShellCommand("pm grant $currentPackage $permission")
+                }
             }
         }
     }
@@ -96,6 +107,7 @@ object DeviceHandler {
     fun getTestsOutputsDevicePath(): String {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val testsOutputsPath = context.externalMediaDirs.firstOrNull()?.absolutePath
+        Log.info("Tests Output Path: '$testsOutputsPath'")
         return (testsOutputsPath
             ?: throw IllegalStateException("It was not possible to access apps external files dir")) +
                 "/kranberryTestsOutputs/${date}"
