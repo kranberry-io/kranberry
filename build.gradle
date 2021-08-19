@@ -16,7 +16,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
-        classpath "io.github.kranberry-io:runtests:$PUBLISH_VERSION"
+        // uncomment to test kranberry tests
+//        classpath "io.github.kranberry-io:runtests:$PUBLISH_VERSION"
     }
 }
 
@@ -41,15 +42,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: rootProject.file("versions.gradle")
 apply plugin: "io.gitlab.arturbosch.detekt"
-apply plugin: "io.github.kranberry-io.runtests"
+// uncomment to test kranberry tests
+//apply plugin: "io.github.kranberry-io.runtests"
 apply from: "${rootProject.projectDir}/tools/publish/publish-module.gradle"
 
-kranberryTests {
-    packageName = "io.kranberry"
-    packageTests = "io.kranberry.wrapper.test"
-    androidTestApkOutputPath = "build/outputs/apk/androidTest/release/kranberry-release-androidTest.apk"
-    testsRunner = "androidx.test.runner.AndroidJUnitRunner"
-}
+// uncomment to test kranberry tests
+//kranberryTests {
+//    packageName = "io.kranberry"
+//    packageTests = "io.kranberry.wrapper.test"
+//    androidTestApkOutputPath = "build/outputs/apk/androidTest/release/kranberry-release-androidTest.apk"
+//    testsRunner = "androidx.test.runner.AndroidJUnitRunner"
+//}
 
 android {
     testBuildType "release"
