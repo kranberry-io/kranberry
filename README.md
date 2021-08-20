@@ -40,7 +40,12 @@ Our goal is to provide resources so you can start a test package quickly, while 
 
 The library is published to Maven Central.
 
-## Gradle
+To use the Kranberry library, follow the steps:
+* [Setup Kranberry Dependency](#setup-kranberry-dependency)
+* [Run Tests Using Makefile](#run-tests-using-makefile)
+* [Run Tests Using Kranberry Gradle Plugin](#run-tests-using-kranberry-gradle-plugin)
+
+## Setup Kranberry Dependency
 
 Add the Maven Central repository if it is not already there:
 
@@ -67,6 +72,8 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 
 6. [Add the `/kranberry-outputs/` information](https://github.com/kranberry-io/kranberry-sample/commit/ab368088d38574818725b4c284744b3552f201aa) to your `gitignore` file. This will prevent you from publishing test outputs in your repository.
 
+## Run Tests Using Makefile
+
 7. If you want to run your tests in a customized way, [you can include a Makefile](https://github.com/kranberry-io/kranberry-sample/commit/1525eb53495fdc1917048394fb1ea1fe6eb56427) , modifying the execution tasks with desired parameters.
 
 8. 🥳 🎉 Voilà! Now you can run your first test from the terminal command line:
@@ -76,6 +83,41 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 </div>
 
 > Note that there is a previously opened emulator to run the tests.
+
+## Run Tests Using Kranberry Gradle Plugin
+
+9. Now you can also use the gradle plugin to run the tests from the `./gradlew runKranberryTests` command. [To do this include the settings in the `build.gradle` and `module:build.gradle` files](https://github.com/kranberry-io/kranberry-sample/commit/15b84f2bc72f378f7e1fff22f230352770b2826e) :
+
+> build.gradle
+```kotlin
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    ext.kranberry_version = '1.0-beta'
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.github.kranberry-io:runtests:1.0-beta"
+```
+
+> module/build.gradle
+```kotlin
+apply plugin: "io.github.kranberry-io.runtests"
+
+kranberryTests {
+    packageName = "io.kranberry.sample"
+    packageTests = "io.kranberry.sample.test"
+    apkOutputPath = "build/outputs/apk/debug/app-debug.apk"
+    androidTestApkOutputPath = "build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+    testsRunner = "androidx.test.runner.AndroidJUnitRunner"
+}
+```
 
 ------------------------------------------------------------------------
 # Roadmap
