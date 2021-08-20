@@ -1,14 +1,14 @@
 ------------------------------------------------------------------------
 
 <div align="center">
-<img align="center" alt="CI" height="25" src="https://github.com/kranberry-io/kranberry/actions/workflows/build-actions.yml/badge.svg?style=for-the-badge">
+<img align="center" alt="CI" height="25" src="https://github.com/kranberry-io/kranberry/actions/workflows/build-actions.yml/badge.svg?style=plastic">
 <img align="center" alt="CONTRIBUTORS" height="26" src="https://img.shields.io/github/contributors/kranberry-io/kranberry.svg?style=plastic&color=orange">
 <img align="center" alt="Stargazers" height="26" src="https://img.shields.io/github/stars/kranberry-io/kranberry.svg?style=plastic&color=blueviolet">
 <img align="center" alt="Issues" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic">
 <img align="center" alt="License" height="26" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=plastic)](https://opensource.org/licenses/Apache-2.0">
 <img align="center" alt="Forks" height="26" src="https://img.shields.io/github/forks/kranberry-io/kranberry.svg?style=plastic&color=orange">
-<img align="center" alt="Last Commit" height="26" src="https://img.shields.io/github/last-commit/kranberry-io/kranberry?style=for-the-badge">
-<img align="center" alt="Release Date" height="26" src="https://img.shields.io/github/release-date/kranberry-io/kranberry?style=for-the-badge">
+<img align="center" alt="Last Commit" height="26" src="https://img.shields.io/github/last-commit/kranberry-io/kranberry?style=plastic">
+<img align="center" alt="Release Date" height="26" src="https://img.shields.io/github/release-date/kranberry-io/kranberry?style=plastic">
 <img align="center" alt="Visitors" height="26" src="https://visitor-badge-reloaded.herokuapp.com/badge?page_id=kranberry-io.kranberry&color=00cf00">
 </div>
 
@@ -82,7 +82,7 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 
 <div align="center">
 <img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic">
-<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=for-the-badge">
+<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=plastic">
 </div>
 
 See the [open issues](https://github.com/kranberry-io/kranberry/labels/feature) for a list of proposed features (and known issues).
