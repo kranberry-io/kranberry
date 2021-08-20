@@ -81,8 +81,8 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 # Roadmap
 
 <div align="center">
-<img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic">
-<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=plastic">
+<img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic&color=green">
+<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=plastic&color=red">
 </div>
 
 See the [open issues](https://github.com/kranberry-io/kranberry/labels/feature) for a list of proposed features (and known issues).
