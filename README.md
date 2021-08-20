@@ -1,17 +1,21 @@
 ------------------------------------------------------------------------
 
-
-![CI](https://github.com/kranberry-io/kranberry/actions/workflows/build-actions.yml/badge.svg?style=for-the-badge)
-![CONTRIBUTORS](https://img.shields.io/github/contributors/kranberry-io/kranberry.svg)
-![Stargazers](https://img.shields.io/github/stars/kranberry-io/kranberry.svg)
-![Issues](https://img.shields.io/github/issues/kranberry-io/kranberry.svg)
-![License](https://img.shields.io/github/license/kranberry-io/kranberry.svg)
-![Forks](https://img.shields.io/github/forks/kranberry-io/kranberry.svg)
+<div align="center">
+<img align="center" alt="CI" height="25" src="https://github.com/kranberry-io/kranberry/actions/workflows/build-actions.yml/badge.svg?style=for-the-badge">
+<img align="center" alt="CONTRIBUTORS" height="26" src="https://img.shields.io/github/contributors/kranberry-io/kranberry.svg?style=plastic&color=orange">
+<img align="center" alt="Stargazers" height="26" src="https://img.shields.io/github/stars/kranberry-io/kranberry.svg?style=plastic&color=blueviolet">
+<img align="center" alt="Issues" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic">
+<img align="center" alt="License" height="26" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=plastic)](https://opensource.org/licenses/Apache-2.0">
+<img align="center" alt="Forks" height="26" src="https://img.shields.io/github/forks/kranberry-io/kranberry.svg?style=plastic&color=orange">
+<img align="center" alt="Last Commit" height="26" src="https://img.shields.io/github/last-commit/kranberry-io/kranberry?style=for-the-badge">
+<img align="center" alt="Release Date" height="26" src="https://img.shields.io/github/release-date/kranberry-io/kranberry?style=for-the-badge">
+<img align="center" alt="Visitors" height="26" src="https://visitor-badge-reloaded.herokuapp.com/badge?page_id=kranberry-io.kranberry&color=00cf00">
+</div>
 
 ------------------------------------------------------------------------
 ![](README/kranberry1.png)
 ------------------------------------------------------------------------
-1. [About The Project](#about-the-project)
+1. [About Kranberry](#about-kranberry)
 2. [Getting Started](#getting-started)
 3. [Kranberry Properties File](#kranberry-properties-file)
 4. [Roadmap](#roadmap)
@@ -19,7 +23,15 @@
 6. [License](#license)
 
 ------------------------------------------------------------------------
-# About The Project
+# About Kranberry
+
+Maintaining Android Mobile UI test codes, which are already structured, is relatively easier than starting them from scratch.
+
+Building/adapting an architecture, defining libraries and their compatibilities ends up consuming precious time when we need to build end-to-end functional tests (E2E).
+
+To get around this issue, we developed an Open-source library in order to facilitate the integration of native UI tests for Android in Kotlin, which aims to reduce the time and complexity of initial configuration of these test modules.
+
+Our goal is to provide resources so you can start a test package quickly, while we provide you with settings and features you won't waste time worrying about!
 
 ------------------------------------------------------------------------
 # Getting Started
@@ -59,12 +71,20 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 
 8. 🥳 🎉 Voilà! Now you can run your first test from the terminal command line:
 
-![](README/test-execution-kranberry.gif)
-> Note that there is a previously opened emulator to run the tests.
+<div align="center">
+<img align="center" alt="Run-Tests-Gif" src="https://github.com/kranberry-io/kranberry/blob/master/README/test-execution-kranberry.gif">
+</div>
 
+> Note that there is a previously opened emulator to run the tests.
 
 ------------------------------------------------------------------------
 # Roadmap
+
+<div align="center">
+<img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic">
+<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=for-the-badge">
+</div>
+
 See the [open issues](https://github.com/kranberry-io/kranberry/labels/feature) for a list of proposed features (and known issues).
 
 ------------------------------------------------------------------------
@@ -81,7 +101,19 @@ Contributions are what make the open source community such an amazing place to b
 ------------------------------------------------------------------------
 # License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the Apache Version 2.0 License. See `LICENSE` for more information.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this software except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 
 ------------------------------------------------------------------------
 # Kranberry Properties File
@@ -95,20 +127,20 @@ Below you will find more details about the parameters that can be used:
 
 ## Properties table
 
-| Parameter                             	| Description                                                                                                                                                                                    	|     Type     	| Obligatory 	|        Default Value       	|
-|---------------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|:------------:	|:----------:	|:--------------------------:	|
-| app_packages                          	| Packages of the applications that will be tested. The first package in the list will be referenced by the Kranberry constant `APP_PACKAGE`. The others will be used for permission management. 	| List<String> 	|     Yes    	|     io.kranberry.sample    	|
-| clear_application_data_before_testing 	| Defines whether the application data defined in the `app_packages` parameter list will be cleared before running the tests.                                                                    	|              	|            	| FALSE                      	|
-| default_timeout                       	| Default implicit timeout for interaction with UI elements in milliseconds.                                                                                                                     	|     Long     	|     No     	|            60000           	|
-| disable_animations                    	| Defines whether animations will be disabled during instrumentation tests. The goal is to increase test performance.                                                                            	|              	|            	| TRUE                       	|
-| max_search_swipes                     	| Sets the maximum scroll down/up will be performed when fetching an element using the methods of the `io.kranberry.ui.Swipe` class.                                                             	|      Int     	|     No     	|                            	|
-| page_load_timeout                     	| Defines the maximum implicit wait time for the element set in the `progressbar_class` property. This is used in Kranberry's `waitForPageLoad()` method.                                        	|     Long     	|     No     	| 30000                      	|
-| permissions_granted_to_device         	| Defines the list of permissions that will be granted to app packages set in the `app_packages ` property.                                                                                      	| List<String> 	|     No     	|    ACCESS_FINE_LOCATION    	|
-| print_colored_logs                    	| Defines if the terminal logs will be printed colored.                                                                                                                                          	|              	|            	| TRUE                       	|
-| progressbar_class                     	| Defines the progress bar class that will be implicitly expected. This is used in Kranberry's `waitForPageLoad()` method.                                                                       	| List<String> 	|     No     	| android.widget.ProgressBar 	|
-| skip_chrome_welcome_screen            	| Defines whether the application data defined in the `app_packages` parameter list will be cleared before running the tests.                                                                    	|    Boolean   	|     No     	| TRUE                       	|
-| swipe_down_params                     	| Defines the list of parameters that will be used in method swipeDown(). These being in order: `SWIPE_DOWN_START_X, SWIPE_DOWN_START_Y, SWIPE_DOWN_END_X, SWIPE_DOWN_END_Y, SWIPE_DOWN_STEPS`   	|  List<Long>  	|     No     	|                            	|
-| swipe_up_params                       	| Defines the list of parameters that will be used in method swipeUp(). These being in order: `SWIPE_UP_START_X, SWIPE_UP_START_Y, SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS`               	|  List<Long>  	|     No     	|                            	|
+| Parameter                              	| Description                                                                                                                                                                                    	|     Type     	| Obligatory 	|        Default Value        	|
+|----------------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|:------------:	|:----------:	|:---------------------------:	|
+| app_packages                           	| Packages of the applications that will be tested. The first package in the list will be referenced by the Kranberry constant `APP_PACKAGE`. The others will be used for permission management. 	| List<String> 	|     Yes    	|     io.kranberry.sample     	|
+| clear_application _data_before_testing 	| Defines whether the application data defined in the `app_packages` parameter list will be cleared before running the tests.                                                                    	|              	|            	| FALSE                       	|
+| default_timeout                        	| Default implicit timeout for interaction with UI elements in milliseconds.                                                                                                                     	|     Long     	|     No     	|            60000            	|
+| disable_animations                     	| Defines whether animations will be disabled during instrumentation tests. The goal is to increase test performance.                                                                            	|              	|            	| TRUE                        	|
+| max_search_swipes                      	| Sets the maximum scroll down/up will be performed when fetching an element using the methods of the `io.kranberry.ui.Swipe` class.                                                             	|      Int     	|     No     	|                             	|
+| page_load_timeout                      	| Defines the maximum implicit wait time for the element set in the `progressbar_class` property. This is used in Kranberry's `waitForPageLoad()` method.                                        	|     Long     	|     No     	| 30000                       	|
+| permissions_granted _to_device         	| Defines the list of permissions that will be granted to app packages set in the `app_packages ` property.                                                                                      	| List<String> 	|     No     	|     ACCESS_FINE_LOCATION    	|
+| print_colored_logs                     	| Defines if the terminal logs will be printed colored.                                                                                                                                          	|              	|            	| TRUE                        	|
+| progressbar_class                      	| Defines the progress bar class that will be implicitly expected. This is used in Kranberry's `waitForPageLoad()` method.                                                                       	| List<String> 	|     No     	| android.widget .ProgressBar 	|
+| skip_chrome_welcome_screen             	| Defines whether the application data defined in the `app_packages` parameter list will be cleared before running the tests.                                                                    	|    Boolean   	|     No     	| TRUE                        	|
+| swipe_down_params                      	| Defines the list of parameters that will be used in method swipeDown(). These being in order: `SWIPE_DOWN_START_X, SWIPE_DOWN_START_Y, SWIPE_DOWN_END_X, SWIPE_DOWN_END_Y, SWIPE_DOWN_STEPS`   	|  List<Long>  	|     No     	|                             	|
+| swipe_up_params                        	| Defines the list of parameters that will be used in method swipeUp(). These being in order: `SWIPE_UP_START_X, SWIPE_UP_START_Y, SWIPE_UP_END_X, SWIPE_UP_END_Y, SWIPE_UP_STEPS`               	|  List<Long>  	|     No     	|                             	|
 
 ## Example of properties file
 
