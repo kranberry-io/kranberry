@@ -38,7 +38,7 @@ Our goal is to provide resources so you can start a test package quickly, while 
 
 > Note that the library is experimental, and the API is subject to change.
 
-The library is published to Maven Central.
+The library is published to [Maven Central](https://mvnrepository.com/artifact/io.github.kranberry-io/kranberry).
 
 To use the Kranberry library, follow the steps:
 * [Setup Kranberry Dependency](#setup-kranberry-dependency)
