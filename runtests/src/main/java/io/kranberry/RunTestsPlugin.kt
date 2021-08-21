@@ -8,6 +8,7 @@ import org.gradle.api.provider.Property
 interface RunTestsPluginExtension {
     val packageName: Property<String>
     val packageTests: Property<String>
+    val applicationId: Property<String>
     val apkOutputPath: Property<String>
     val androidTestApkOutputPath: Property<String>
     val testsRunner: Property<String>
@@ -25,8 +26,8 @@ class RunTestsPlugin : Plugin<Project> {
                 task.doLast {
                     project.exec {
                         // Pull results
-                        val testsPackage = packageTests.getOrElse(packageName.get())
-                        val pullPath = "/storage/emulated/0/Android/media/$testsPackage"
+                        val resultsPackage = applicationId.getOrElse(packageName.get())
+                        val pullPath = "/storage/emulated/0/Android/media/$resultsPackage"
                         it.commandLine("bash", "-l", "-c", "rm -rf kranberry-outputs")
                         it.commandLine("bash", "-l", "-c", "mkdir kranberry-outputs")
                         it.commandLine("bash", "-l", "-c", "adb pull $pullPath kranberry-outputs")
@@ -92,12 +93,12 @@ class RunTestsPlugin : Plugin<Project> {
                             "adb shell logcat -b all -c")
 
                         // Configure logcat
-                        it.commandLine("bash", "-l", "-c",
+                        it.commandLine("bash", "-c",
                             "adb logcat *:S KRANBERRY_LOG:V & LOGCAT_PID=\$\$!",)
 
                         // Run tests
                         val testsPackage = packageTests.getOrElse(packageName.get())
-                        it.commandLine("bash", "-l", "-c",
+                        it.commandLine("bash", "-c",
                             "adb shell am instrument -w -e package ${packageName.get()} ${testsPackage}/${testsRunner.getOrElse("androidx.test.runner.AndroidJUnitRunner")}" )
                     }
                 }.dependsOn(installKranberryTestApks)
