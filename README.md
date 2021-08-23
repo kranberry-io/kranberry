@@ -25,6 +25,7 @@
 5. [Contributing](#contributing)
 6. [Templates](#templates)
     - [Kranberry Properties](#kranberry-properties)
+    - [Android Test Manifest](#android-test-manifest)
     - [App class](#app-class)
     - [Home class](#home-class)
     - [Test class](#test-class)
@@ -67,24 +68,31 @@ repositories {
 
 ```groovy
 // Kranberry
-androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
+androidTestImplementation 'io.github.kranberry-io:kranberry:1.0.1-beta'
 ```
 
-2. [Add a `kranberry.properties.json`](https://github.com/kranberry-io/kranberry-sample/commit/3bf5302643c7fdbfebe108149c1b7e7a6585d629) file in the path `module/src/androidTest/assets`. If the folder does not exist, you must create it.
+2. [Add a `kranberry.properties.json`](https://github.com/kranberry-io/kranberry-sample/commit/3bf5302643c7fdbfebe108149c1b7e7a6585d629) file in the path `module/src/androidTest/assets`. If the folder does not exist, you must create it. [💡 See the template](#kranberry-properties)
 
-3. [Add an `AndroidManifest.xml`](https://github.com/kranberry-io/kranberry-sample/commit/ba3c973de8924c875ac8d87d897833c5802a18f0) file in the path `module/src/androidTest`. If the folder does not exist, you must create it.
+3. [Add an `AndroidManifest.xml`](https://github.com/kranberry-io/kranberry-sample/commit/ba3c973de8924c875ac8d87d897833c5802a18f0) file in the path `module/src/androidTest`. If the folder does not exist, you must create it. [💡 See the template](#android-test-manifest)
 
-4. [Add an `App.kt` class](https://github.com/kranberry-io/kranberry-sample/commit/31a50136acef58b0146dd70d114e3c18597e7cf4) in the path `module/src/androidTest/java/feature`. If the folder does not exist, you must create it. This step will serve to implement the method that will open your app.
+4. [Add an `App.kt` class](https://github.com/kranberry-io/kranberry-sample/commit/31a50136acef58b0146dd70d114e3c18597e7cf4) in the path `module/src/androidTest/java/feature`. If the folder does not exist, you must create it. This step will serve to implement the method that will open your app. [💡 See the template](#app-class)
 
-5. [Add a `Home.kt` class](https://github.com/kranberry-io/kranberry-sample/commit/3aec77f09476101d1b9310d65f6b747ee5c5eac7) in the path `module/src/androidTest/java/feature`. If the folder does not exist, you must create it. This step will serve to implement navigation steps and assertions.
+5. [Add a `Home.kt` class](https://github.com/kranberry-io/kranberry-sample/commit/3aec77f09476101d1b9310d65f6b747ee5c5eac7) in the path `module/src/androidTest/java/feature`. If the folder does not exist, you must create it. This step will serve to implement navigation steps and assertions.   [💡 See the template](#home-class)
 
-6. [Add the `/kranberry-outputs/` information](https://github.com/kranberry-io/kranberry-sample/commit/ab368088d38574818725b4c284744b3552f201aa) to your `gitignore` file. This will prevent you from publishing test outputs in your repository.
+6. [Add a test using the pre-implemented App and Home features](https://github.com/kranberry-io/kranberry-sample/commit/3fa55bdbd598f6131c2cd4875dee5d58ef33200b). If the folder does not exist, you must create it. This step will serve to implement navigation steps and assertions.   [💡 See the template](#test-class)
+
+7. [Add the `/kranberry-outputs/` information](https://github.com/kranberry-io/kranberry-sample/commit/ab368088d38574818725b4c284744b3552f201aa) to your `gitignore` file. This will prevent you from publishing test outputs in your repository.
+
+```groovy
+	/kranberry-outputs/
+	/app/kranberry-outputs/
+```
 
 ## Run Tests Using Makefile
 
-7. If you want to run your tests in a customized way, [you can include a Makefile](https://github.com/kranberry-io/kranberry-sample/commit/1525eb53495fdc1917048394fb1ea1fe6eb56427) , modifying the execution tasks with desired parameters.
+8. If you want to run your tests in a customized way, [you can include a Makefile](https://github.com/kranberry-io/kranberry-sample/commit/1525eb53495fdc1917048394fb1ea1fe6eb56427) , modifying the execution tasks with desired parameters.  [💡 See the template](#makefile)
 
-8. 🥳 🎉 Voilà! Now you can run your first test from the terminal command line:
+🥳 🎉 Voilà! Now you can run your first test from the terminal command line:
 
 <div align="center">
 <img align="center" alt="Run-Tests-Gif" src="https://github.com/kranberry-io/kranberry/blob/master/README/test-execution-kranberry.gif">
@@ -94,6 +102,8 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 
 ## Run Tests Using Kranberry Gradle Plugin
 
+<span style="color:red">*🛠 This feature is under construction! But you can use the current version which doesn't have the output printing in the terminal console yet.*</span>.
+
 9. Now you can also use the gradle plugin to run the tests from the `./gradlew runKranberryTests` command. [To do this include the settings in the `build.gradle` and `module:build.gradle` files](https://github.com/kranberry-io/kranberry-sample/commit/15b84f2bc72f378f7e1fff22f230352770b2826e) :
 
 > build.gradle
@@ -101,7 +111,7 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 ```kotlin
 buildscript {
     ext.kotlin_version = '1.4.10'
-    ext.kranberry_version = '1.0-beta'
+    ext.kranberry_version = '1.0.1-beta'
     repositories {
         google()
         jcenter()
@@ -112,7 +122,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.github.kranberry-io:runtests:1.0-beta"
+        classpath "io.github.kranberry-io:runtests:1.0.1-beta"
 ```
 
 > module/build.gradle
@@ -206,6 +216,7 @@ Contributions are what make the open source community such an amazing place to b
 # Templates
 
 * [Kranberry Properties](#kranberry-properties)
+* [Android Test Manifest](#android-test-manifest)
 * [App class](#app-class)
 * [Home class](#home-class)
 * [Test class](#test-class)
@@ -237,7 +248,25 @@ Contributions are what make the open source community such an amazing place to b
   "test-class_prefix": "your.app.package.test"
 }
 ```
-[⬅️ ](#templates) [➡️](#app-class) [⬆️](#templates)
+[⬅️ ](#templates) [➡️](#android-test-manifest) [⬆️](#templates)
+	
+### Android Test Manifest
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.kranberry.sample.test">
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+</manifest>
+```
+[⬅️ ](##kranberry-properties) [➡️](#app-class) [⬆️](#templates)
 
 ### App class
 
