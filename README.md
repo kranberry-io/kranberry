@@ -94,7 +94,7 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:1.0.1-beta'
 
 8. If you want to run your tests in a customized way, [you can include a Makefile](https://github.com/kranberry-io/kranberry-sample/commit/1525eb53495fdc1917048394fb1ea1fe6eb56427) , modifying the execution tasks with desired parameters.  [💡 See the template](#makefile)
 
-🥳 🎉 Voilà! Now you can run your first test from the terminal command line:
+🥳 🎉 Voilà! Now you can run your first test from the terminal command line by using `make run-kranberry`:
 
 <div align="center">
 <img align="center" alt="Run-Tests-Gif" src="https://github.com/kranberry-io/kranberry/blob/master/README/test-execution-kranberry.gif">
