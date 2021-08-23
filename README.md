@@ -257,7 +257,7 @@ Contributions are what make the open source community such an amazing place to b
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.kranberry.sample.test">
+    package="your.app.package.test">
 
     <uses-sdk
         android:minSdkVersion="24"
