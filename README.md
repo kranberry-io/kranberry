@@ -223,7 +223,7 @@ Contributions are what make the open source community such an amazing place to b
 * [Makefile](#makefile)
 
 ### Kranberry Properties
-`module/src/androidTest/assets`
+`module/src/androidTest/assets/kranberry.properties.json`
 
 ```json
 {
@@ -252,7 +252,7 @@ Contributions are what make the open source community such an amazing place to b
 [⬅️ ](#templates) [➡️](#android-test-manifest) [⬆️](#setup-kranberry-dependency)
 	
 ### Android Test Manifest
-`module/src/androidTest`
+`module/src/androidTest/AndroidManifest.xml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -271,7 +271,7 @@ Contributions are what make the open source community such an amazing place to b
 [⬅️ ](##kranberry-properties) [➡️](#app-class) [⬆️](#setup-kranberry-dependency)
 
 ### App class
-`module/src/androidTest/java/feature/`
+`module/src/androidTest/java/feature/App.kt`
 
 ```Kotlin
 package feature
@@ -295,7 +295,7 @@ class App(device: UiDevice) : BaseUi(device) {
 [⬅️](#kranberry-properties) [➡️](#home-class) [⬆️](#setup-kranberry-dependency)
 
 ### Home class
-`module/src/androidTest/java/feature/`
+`module/src/androidTest/java/feature/Home.kt`
 
 ```Kotlin
 package feature
@@ -317,7 +317,7 @@ class Home(device: UiDevice) : BaseUi(device) {
 
 [⬅️](#app-class) [➡️](#test-class) [⬆️](#setup-kranberry-dependency)
 ### Test class
-`module/src/androidTest/java/your/app/package/`
+`module/src/androidTest/java/your/app/package/YourTestJourney.kt`
 
 ```Kotlin
 package your.app.package
@@ -332,7 +332,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 24)
-class KranberrySample {
+class YourTestJourney {
 
     @Rule
     @JvmField
