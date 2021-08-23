@@ -56,12 +56,12 @@ To use the Kranberry library, follow the steps:
 
 ## Setup Kranberry Dependency
 
-Add the Maven Central repository if it is not already there:
+Add the [Maven Central](https://mvnrepository.com/artifact/io.github.kranberry-io/kranberry) repository in the **root/build.gradle** file if it is not already there:
 
 ```groovy
-repositories {
-    mavenCentral()
-}
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
 ```
 
 1. [Add the Kranberry dependency](https://github.com/kranberry-io/kranberry-sample/commit/108de28c0d0c7c527187beb9a1b4662605ccbbac#diff-51a0b488f963eb0be6c6599bf5df497313877cf5bdff3950807373912ac1cdc9) to your `module/build.gradle` file inside the package that will be tested (not the build.gradle file in the project root):
