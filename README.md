@@ -126,7 +126,6 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:1.0.1-beta'
 
 ```kotlin
 apply plugin: "io.github.kranberry-io.runtests"
-}
 ```
 
 * `kranberryTests`
@@ -141,6 +140,8 @@ kranberryTests {
     testsRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 ```
+
+🥳 🎉 Voilà! Now you can run your first test from the terminal command line by using `./gradlew runKranberryTests`
 
 ------------------------------------------------------------------------
 # Kranberry Properties File
