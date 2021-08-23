@@ -108,38 +108,40 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:1.0.1-beta'
 
 9. Now you can also use the gradle plugin to run the tests from the `./gradlew runKranberryTests` command. [To do this include the settings in the `build.gradle` and `module:build.gradle` files](https://github.com/kranberry-io/kranberry-sample/commit/15b84f2bc72f378f7e1fff22f230352770b2826e) :
 
-> build.gradle
+> root/build.gradle 
+
+* `buildscript`
 
 ```kotlin
-buildscript {
-    ext.kotlin_version = '1.4.10'
     ext.kranberry_version = '1.0.1-beta'
-    repositories {
-        google()
-        jcenter()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.github.kranberry-io:runtests:1.0.1-beta"
+```
+
+* `dependencies`
+
+```kotlin
+        classpath "io.github.kranberry-io:runtests:$kranberry_version"
 ```
 
 > module/build.gradle
 
 ```kotlin
 apply plugin: "io.github.kranberry-io.runtests"
+}
+```
 
+* `kranberryTests`
+
+```kotlin
 kranberryTests {
-    packageName = "io.kranberry.sample"
-    packageTests = "io.kranberry.sample.test"
+    packageName = "your.app.package"
+    packageTests = "your.app.package.test"
+    applicationId = "your.app.package"
     apkOutputPath = "build/outputs/apk/debug/app-debug.apk"
     androidTestApkOutputPath = "build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
     testsRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 ```
+
 ------------------------------------------------------------------------
 # Kranberry Properties File
 
