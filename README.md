@@ -81,11 +81,11 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:1.0.1-beta'
 
 6. [Add a test using the pre-implemented App and Home features](https://github.com/kranberry-io/kranberry-sample/commit/3fa55bdbd598f6131c2cd4875dee5d58ef33200b). If the folder does not exist, you must create it. This step will serve to implement navigation steps and assertions.   [💡 See the template](#test-class)
 
-7. [Add the `/kranberry-outputs/` information](https://github.com/kranberry-io/kranberry-sample/commit/ab368088d38574818725b4c284744b3552f201aa) to your `gitignore` file. This will prevent you from publishing test outputs in your repository.
+7. [Add the `/kranberry-outputs/` information](https://github.com/kranberry-io/kranberry-sample/commit/ab368088d38574818725b4c284744b3552f201aa) to your `root/gitignore` file. This will prevent you from publishing test outputs in your repository.
 
 ```groovy
-	/kranberry-outputs/
-	/app/kranberry-outputs/
+/kranberry-outputs/
+/app/kranberry-outputs/
 ```
 
 ## Run Tests Using Makefile
