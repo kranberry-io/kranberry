@@ -17,18 +17,18 @@
 ------------------------------------------------------------------------
 1. [About Kranberry](#about-kranberry)
 2. [Getting Started](#getting-started)
-  * [Setup Kranberry Dependency](#setup-kranberry-dependency)
-  * [Run Tests Using Makefile](#run-tests-using-makefile)
-  * [Run Tests Using Kranberry Gradle Plugin](#run-tests-using-kranberry-gradle-plugin)
+    - [Setup Kranberry Dependency](#setup-kranberry-dependency)
+    - [Run Tests Using Makefile](#run-tests-using-makefile)
+    - [Run Tests Using Kranberry Gradle Plugin](#run-tests-using-kranberry-gradle-plugin)
 3. [Kranberry Properties File](#kranberry-properties-file)
 4. [Roadmap](#roadmap)
 5. [Contributing](#contributing)
 6. [Templates](#templates)
-  * [Kranberry Properties](#kranberry-properties)
-  * [App class](#app_class)
-  * [Home class](#home_class)
-  * [Test class](#test_class)
-  * [Makefile](#makefile)
+    - [Kranberry Properties](#kranberry-properties)
+    - [App class](#app-class)
+    - [Home class](#home-class)
+    - [Test class](#test-class)
+    - [Makefile](#makefile)
 7. [License](#license)
 ------------------------------------------------------------------------
 # About Kranberry
@@ -206,9 +206,9 @@ Contributions are what make the open source community such an amazing place to b
 # Templates
 
 * [Kranberry Properties](#kranberry-properties)
-* [App class](#app_class)
-* [Home class](#home_class)
-* [Test class](#test_class)
+* [App class](#app-class)
+* [Home class](#home-class)
+* [Test class](#test-class)
 * [Makefile](#makefile)
 
 ### Kranberry Properties
@@ -234,9 +234,10 @@ Contributions are what make the open source community such an amazing place to b
     "android.widget.ProgressBar"
   ],
   "print_colored_logs": true,
-  "test_class_prefix": "your.app.package.test"
+  "test-class_prefix": "your.app.package.test"
 }
 ```
+[⬅️ ](#templates) [➡️](#app-class) [⬆️](#templates)
 
 ### App class
 
@@ -259,6 +260,8 @@ class App(device: UiDevice) : BaseUi(device) {
 }
 ```
 
+[⬅️](#kranberry-properties) [➡️](#home-class) [⬆️](#templates)
+
 ### Home class
 
 ```Kotlin
@@ -279,6 +282,7 @@ class Home(device: UiDevice) : BaseUi(device) {
 }
 ```
 
+[⬅️](#app-class) [➡️](#test-class) [⬆️](#templates)
 ### Test class
 
 ```Kotlin
@@ -307,6 +311,7 @@ class KranberrySample {
     }
 }
 ```
+[⬅️](#home-class) [➡️](#makefile) [⬆️](#templates)
 
 ### Makefile
 
@@ -363,6 +368,8 @@ test: buildDebug buildAndroidTestDebug installDebug installAndroidTestDebug clea
 run-kranberry:
 	@make test && make copy-tests-outputs
 ```
+
+[⬅️](#test-class) [➡️](#license) [⬆️](#templates)
 
 ------------------------------------------------------------------------
 # License
