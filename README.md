@@ -223,6 +223,7 @@ Contributions are what make the open source community such an amazing place to b
 * [Makefile](#makefile)
 
 ### Kranberry Properties
+`module/src/androidTest/assets`
 
 ```json
 {
@@ -248,9 +249,10 @@ Contributions are what make the open source community such an amazing place to b
   "test-class_prefix": "your.app.package.test"
 }
 ```
-[⬅️ ](#templates) [➡️](#android-test-manifest) [⬆️](#templates)
+[⬅️ ](#templates) [➡️](#android-test-manifest) [⬆️](#setup-kranberry-dependency)
 	
 ### Android Test Manifest
+`module/src/androidTest`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -266,9 +268,10 @@ Contributions are what make the open source community such an amazing place to b
 
 </manifest>
 ```
-[⬅️ ](##kranberry-properties) [➡️](#app-class) [⬆️](#templates)
+[⬅️ ](##kranberry-properties) [➡️](#app-class) [⬆️](#setup-kranberry-dependency)
 
 ### App class
+`module/src/androidTest/java/feature/`
 
 ```Kotlin
 package feature
@@ -289,9 +292,10 @@ class App(device: UiDevice) : BaseUi(device) {
 }
 ```
 
-[⬅️](#kranberry-properties) [➡️](#home-class) [⬆️](#templates)
+[⬅️](#kranberry-properties) [➡️](#home-class) [⬆️](#setup-kranberry-dependency)
 
 ### Home class
+`module/src/androidTest/java/feature/`
 
 ```Kotlin
 package feature
@@ -311,10 +315,12 @@ class Home(device: UiDevice) : BaseUi(device) {
 }
 ```
 
-[⬅️](#app-class) [➡️](#test-class) [⬆️](#templates)
+[⬅️](#app-class) [➡️](#test-class) [⬆️](#setup-kranberry-dependency)
 ### Test class
+`module/src/androidTest/java/your/app/package/`
 
 ```Kotlin
+package your.app.package
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import feature.App
@@ -339,10 +345,12 @@ class KranberrySample {
             .shouldSeeFlowerList()
     }
 }
+}
 ```
-[⬅️](#home-class) [➡️](#makefile) [⬆️](#templates)
+[⬅️](#home-class) [➡️](#makefile) [⬆️](#setup-kranberry-dependency)
 
 ### Makefile
+`root/Makefile`
 
 ```Makefile
 ### BUILD ####
@@ -398,7 +406,7 @@ run-kranberry:
 	@make test && make copy-tests-outputs
 ```
 
-[⬅️](#test-class) [➡️](#license) [⬆️](#templates)
+[⬅️](#test-class) [➡️](#license) [⬆️](#setup-kranberry-dependency)
 
 ------------------------------------------------------------------------
 # License
