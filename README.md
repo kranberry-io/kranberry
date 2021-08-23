@@ -17,11 +17,19 @@
 ------------------------------------------------------------------------
 1. [About Kranberry](#about-kranberry)
 2. [Getting Started](#getting-started)
+  * [Setup Kranberry Dependency](#setup-kranberry-dependency)
+  * [Run Tests Using Makefile](#run-tests-using-makefile)
+  * [Run Tests Using Kranberry Gradle Plugin](#run-tests-using-kranberry-gradle-plugin)
 3. [Kranberry Properties File](#kranberry-properties-file)
 4. [Roadmap](#roadmap)
 5. [Contributing](#contributing)
-6. [License](#license)
-
+6. [Templates](#templates)
+  * [Kranberry Properties](#kranberry-properties)
+  * [App class](#app_class)
+  * [Home class](#home_class)
+  * [Test class](#test_class)
+  * [Makefile](#makefile)
+7. [License](#license)
 ------------------------------------------------------------------------
 # About Kranberry
 
@@ -89,6 +97,7 @@ androidTestImplementation 'io.github.kranberry-io:kranberry:$versions.kranberry'
 9. Now you can also use the gradle plugin to run the tests from the `./gradlew runKranberryTests` command. [To do this include the settings in the `build.gradle` and `module:build.gradle` files](https://github.com/kranberry-io/kranberry-sample/commit/15b84f2bc72f378f7e1fff22f230352770b2826e) :
 
 > build.gradle
+
 ```kotlin
 buildscript {
     ext.kotlin_version = '1.4.10'
@@ -107,6 +116,7 @@ buildscript {
 ```
 
 > module/build.gradle
+
 ```kotlin
 apply plugin: "io.github.kranberry-io.runtests"
 
@@ -118,28 +128,6 @@ kranberryTests {
     testsRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 ```
-
-------------------------------------------------------------------------
-# Roadmap
-
-<div align="center">
-<img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic&color=red">
-<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=plastic&color=green">
-</div>
-
-See the [open issues](https://github.com/kranberry-io/kranberry/labels/feature) for a list of proposed features (and known issues).
-
-------------------------------------------------------------------------
-# Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ------------------------------------------------------------------------
 # Kranberry Properties File
 
@@ -191,6 +179,191 @@ Below you will find more details about the parameters that can be used:
   ]
 }
 ```
+
+------------------------------------------------------------------------
+# Roadmap
+
+<div align="center">
+<img align="center" alt="ISSUES-OPEN" height="26" src="https://img.shields.io/github/issues/kranberry-io/kranberry.svg?style=plastic&color=red">
+<img align="center" alt="CLOSED" height="25" src="https://img.shields.io/github/issues-closed/kranberry-io/kranberry?style=plastic&color=green">
+</div>
+
+See the [open issues](https://github.com/kranberry-io/kranberry/labels/feature) for a list of proposed features (and known issues).
+
+------------------------------------------------------------------------
+# Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+------------------------------------------------------------------------
+# Templates
+
+* [Kranberry Properties](#kranberry-properties)
+* [App class](#app_class)
+* [Home class](#home_class)
+* [Test class](#test_class)
+* [Makefile](#makefile)
+
+### Kranberry Properties
+
+```json
+{
+  "default_timeout": 60000,
+  "clear_application_data_before_testing": false,
+  "skip_chrome_welcome_screen": true,
+  "page_load_timeout": 30000,
+  "disable_animations": true,
+  "app_packages": [
+    "your.app.package"
+  ],
+  "permissions_granted_to_device": [
+    "ACCESS_FINE_LOCATION",
+    "WRITE_EXTERNAL_STORAGE",
+    "READ_EXTERNAL_STORAGE",
+    "READ_CONTACTS",
+    "CAMERA"
+  ],
+  "progressbar_class": [
+    "android.widget.ProgressBar"
+  ],
+  "print_colored_logs": true,
+  "test_class_prefix": "your.app.package.test"
+}
+```
+
+### App class
+
+```Kotlin
+package feature
+
+import androidx.test.uiautomator.UiDevice
+import io.kranberry.environment.DeviceHandler.APP_PACKAGE
+import io.kranberry.environment.DeviceHandler.start
+import io.kranberry.outputs.ScreenshotHandler.takeScreenshot
+import io.kranberry.ui.BaseUi
+
+class App(device: UiDevice) : BaseUi(device) {
+
+    fun open(): Home {
+        start(APP_PACKAGE)
+        takeScreenshot()
+        return Home(device)
+    }
+}
+```
+
+### Home class
+
+```Kotlin
+package feature
+
+import androidx.test.uiautomator.UiDevice
+import io.kranberry.outputs.ScreenshotHandler.takeScreenshot
+import io.kranberry.ui.BaseUi
+import io.kranberry.ui.elementIsPresentByTextContains
+
+class Home(device: UiDevice) : BaseUi(device) {
+
+    fun shouldSeeFlowerList(): Home {
+        assert(elementIsPresentByTextContains("Flowers"))
+        takeScreenshot()
+        return this
+    }
+}
+```
+
+### Test class
+
+```Kotlin
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SdkSuppress
+import feature.App
+import io.kranberry.KranberryRules
+import io.kranberry.environment.TestHandler.device
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+@SdkSuppress(minSdkVersion = 24)
+class KranberrySample {
+
+    @Rule
+    @JvmField
+    val testRule = KranberryRules()
+
+    @Test
+    fun openApp(){
+        App(device)
+            .open()
+            .shouldSeeFlowerList()
+    }
+}
+```
+
+### Makefile
+
+```Makefile
+### BUILD ####
+buildDebug:
+	./gradlew assembleDebug
+
+buildAndroidTestDebug:
+	./gradlew assembleDebugAndroidTest
+
+### INSTALL ###
+installDebug:
+	adb install app/build/outputs/apk/debug/app-debug.apk
+
+installAndroidTestDebug:
+	adb install app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+
+buildInstallDebug: buildDebug installDebug
+
+### TEST ###
+testDebug:
+	./gradlew testDebug
+
+testFileDebug:
+	./gradlew testDebug --tests $(file)
+
+androidTestDebug:
+	./gradlew connectedDebugAndroidTest
+
+androidTestDebugModule:
+	./gradlew :$(module):connectedDebugAndroidTest
+
+androidTestFileDebugModule:
+	./gradlew :$(module):connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=$(file)
+
+clear-logcat-logs:
+	@adb shell logcat -b all -c
+
+copy-tests-outputs:
+	@rm -rf kranberry-outputs; \
+	mkdir kranberry-outputs; \
+	adb pull /storage/emulated/0/Android/media/your.app.package kranberry-outputs; \
+
+### RUN UI TESTS ###
+# before run tests make sure to call: buildDebug buildAndroidTestDebug installDebug installAndroidTestDebug
+test: buildDebug buildAndroidTestDebug installDebug installAndroidTestDebug clear-logcat-logs
+	@adb logcat *:S KRANBERRY_LOG:V & LOGCAT_PID=$$!; \
+	TERM=dumb adb shell am instrument -w your.app.package.test/androidx.test.runner.AndroidJUnitRunner ; \
+	RESULT=$$?; \
+	if [ -n "$$LOGCAT_PID" ]; then kill $$LOGCAT_PID; fi; \
+	exit $$RESULT
+
+run-kranberry:
+	@make test && make copy-tests-outputs
+```
+
 ------------------------------------------------------------------------
 # License
 
