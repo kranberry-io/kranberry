@@ -13,7 +13,12 @@ open class App(device: UiDevice) : BaseUi(device) {
     open fun open(): App {
         DeviceHandler.start(APP_PACKAGE)
         takeScreenshot()
-        assertTrue(elementIsPresentByTextContains("Display"))
+        return this
+    }
+
+    fun shouldSeeFlowerFinderHomePage(): App {
+        assertTrue(elementIsPresentByTextContains("Flower finder"))
+        takeScreenshot()
         return this
     }
 }

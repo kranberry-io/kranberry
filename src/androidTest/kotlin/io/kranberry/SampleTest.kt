@@ -17,8 +17,9 @@ class SampleTest {
     val testRule = KranberryRules()
 
     @Test
-    fun openDeviceSettings() {
+    fun openFlowerFinder() {
         App(device)
-                .open()
+            .open()
+            .shouldSeeFlowerFinderHomePage()
     }
 }
