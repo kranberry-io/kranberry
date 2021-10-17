@@ -67,6 +67,18 @@ fun BaseUi.tapByTextContains(visibleText: String): Boolean {
     return false
 }
 
+fun BaseUi.tapByText(visibleText: String): Boolean {
+    val text: UiObject = device.findObject(
+        UiSelector().text(visibleText)
+    )
+
+    if (text.exists() && text.isEnabled) {
+        text.click()
+        return true
+    }
+    return false
+}
+
 fun BaseUi.tapEnter() {
     device.pressEnter()
 }
