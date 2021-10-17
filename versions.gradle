@@ -2,7 +2,7 @@ ext {
     // sdk versions
     targetApiVersion = 30
     compileApiVersion = 30
-    minApiVersion = 24
+    minApiVersion = 21
     toolsVersion = "29.0.3"
     ndkVersion = "21.1.6352462"
 
