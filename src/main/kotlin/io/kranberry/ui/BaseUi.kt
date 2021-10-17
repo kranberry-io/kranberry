@@ -1,10 +1,11 @@
 package io.kranberry.ui
 
-import androidx.test.uiautomator.UiDevice
 import io.kranberry.environment.DeviceHandler.testEnvironmentProperties
+import io.kranberry.environment.TestHandler
 
-open class BaseUi(open val device: UiDevice) {
+open class BaseUi {
 
+    val device = TestHandler.device
     val appPackage = testEnvironmentProperties.appPackages[0]
     val timeout = testEnvironmentProperties.defaultTimeout
     internal val maxSearchSwipes = testEnvironmentProperties.maxSearchSwipes
