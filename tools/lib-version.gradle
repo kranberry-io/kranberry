@@ -1,5 +1,5 @@
 ext {
     PUBLISH_GROUP_ID = 'io.github.kranberry-io'
-    PUBLISH_VERSION = '1.0.2-beta'
+    PUBLISH_VERSION = '1.0.3-beta'
     PUBLISH_ARTIFACT_ID = 'kranberry'
 }
