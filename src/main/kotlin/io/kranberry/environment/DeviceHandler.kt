@@ -26,6 +26,9 @@ object DeviceHandler {
     private lateinit var appPackage: String
 
     fun start(appPackage: String): UiDevice {
+
+        clearApplicationData(appPackage)
+
         Log.info("Starting the app: '$appPackage'")
         DeviceHandler.appPackage = appPackage
 
@@ -44,6 +47,8 @@ object DeviceHandler {
         when {
             testEnvironmentProperties.clearApplicationDataBeforeTesting -> {
                 device.executeShellCommand("pm clear $appPackage")
+                device.executeShellCommand("pm clear com.android.chrome")
+                device.executeShellCommand("am set-debug-app --persistent com.android.chrome")
             }
         }
     }
