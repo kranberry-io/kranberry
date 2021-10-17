@@ -22,6 +22,7 @@ object TestHandler {
     var failedRate: Double = 0.0
 
     var reportHasHeader: Boolean = false
+    var isANewTestsClass: Boolean = true
 
     private val dateFormat = SimpleDateFormat("yyyy_MM_dd_HHmmss")
     private val now = Date()

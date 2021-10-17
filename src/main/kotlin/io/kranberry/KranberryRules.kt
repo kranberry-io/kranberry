@@ -7,6 +7,7 @@ import io.kranberry.environment.TestHandler.currentTestClassName
 import io.kranberry.environment.TestHandler.currentTestMethodName
 import io.kranberry.environment.TestHandler.device
 import io.kranberry.environment.TestHandler.failedTestCount
+import io.kranberry.environment.TestHandler.isANewTestsClass
 import io.kranberry.environment.TestHandler.passedTestCount
 import io.kranberry.environment.TestHandler.testClassName
 import io.kranberry.environment.TestHandler.testResult
@@ -39,9 +40,14 @@ open class KranberryRules : TestWatcher() {
 
         setScreenshotsName(currentTestMethodName)
 
-        if (testClassName != currentTestClassName) {
-            testClassName(currentTestClassName)
-            Log.startClass()
+        when {
+            testClassName != currentTestClassName -> {
+                testClassName(currentTestClassName)
+                Log.startClass()
+            }
+            else -> {
+                isANewTestsClass = false
+            }
         }
         Log.startTest()
     }
