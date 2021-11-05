@@ -28,7 +28,6 @@ object CsvHandler {
 
     private fun csvResultFile(): File {
         val csvFilePath = getCsvDevicePath() + csvFileName
-        Log.info("CSV File Path: '$csvFilePath'")
         return File(csvFilePath)
     }
 

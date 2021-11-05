@@ -3,6 +3,7 @@ package io.kranberry.ui
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until.findObjects
 import io.kranberry.log.Log
 
 
@@ -21,18 +22,12 @@ fun BaseUi.tapById(id: String): Boolean = if (waitUntilElementIsPresentById(id))
     true
 } else false
 
-fun BaseUi.apByText(visibleText: String): Boolean {
-
-    val text: UiObject = device.findObject(
-        UiSelector().text(visibleText)
-    )
-
-    if (text.exists() && text.isEnabled) {
-        text.click()
-        return true
-    }
-    return false
-}
+fun BaseUi.tapByText(visibleText: String): Boolean = if (waitUntilElementIsPresentByText(visibleText)) {
+    device.wait(findObjects(By.text(visibleText)), timeout)
+    device.findObject(By.text(visibleText)).click()
+    Log.message("The text '$visibleText' was been touched")
+    true
+} else false
 
 fun BaseUi.tapByIndex(index: Int): Boolean {
     val element = findElementByIndex(index)
@@ -58,18 +53,6 @@ fun BaseUi.tapByClass(className: String): Boolean {
 fun BaseUi.tapByTextContains(visibleText: String): Boolean {
     val text: UiObject = device.findObject(
         UiSelector().textContains(visibleText)
-    )
-
-    if (text.exists() && text.isEnabled) {
-        text.click()
-        return true
-    }
-    return false
-}
-
-fun BaseUi.tapByText(visibleText: String): Boolean {
-    val text: UiObject = device.findObject(
-        UiSelector().text(visibleText)
     )
 
     if (text.exists() && text.isEnabled) {

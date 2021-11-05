@@ -40,6 +40,7 @@ object DeviceHandler {
         startApp()
         waitAppStart(device)
         createDevicePaths()
+        device.waitForIdle()
         return device
     }
 
@@ -112,7 +113,6 @@ object DeviceHandler {
     fun getTestsOutputsDevicePath(): String {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val testsOutputsPath = context.externalMediaDirs.firstOrNull()?.absolutePath
-        Log.info("Tests Output Path: '$testsOutputsPath'")
         return (testsOutputsPath
             ?: throw IllegalStateException("It was not possible to access apps external files dir")) +
                 "/kranberryTestsOutputs/${date}"

@@ -19,6 +19,50 @@ fun BaseUi.waitUntilElementIsPresentById(id: String): Boolean {
     return elementIsPresentById(id)
 }
 
+
+/**
+ * Implicitly waits for the element until the default timeout given in the kranberry.properties file.
+ *
+ * @param id of the element you want to fetch,
+ * it is not necessary to include the full path with the appPackage, Kranberry does this automatically.
+ * @return This method returns a boolean, which lets you decide what
+ * to do with the result of it (fail the test or try again, for example)
+ */
+fun BaseUi.waitUntilElementIsClickableById(id: String): Boolean {
+    device.wait(Until.hasObject(By.res(appPackage, id).clickable(true)), timeout)
+    waitForDevice()
+    return elementIsPresentById(id)
+}
+
+/**
+ * Implicitly waits for the element until the default timeout given in the kranberry.properties file.
+ *
+ * @param visibleText of the element you want to fetch,
+ * it is not necessary to include the full path with the appPackage, Kranberry does this automatically.
+ * @return This method returns a boolean, which lets you decide what
+ * to do with the result of it (fail the test or try again, for example)
+ */
+fun BaseUi.waitUntilElementIsClickableByText(visibleText: String): Boolean {
+    device.wait(Until.hasObject(By.text(visibleText).clickable(true)), timeout)
+    waitForDevice()
+    return elementIsPresentById(visibleText)
+}
+
+/**
+ * Implicitly waits for the element until the default timeout given in the kranberry.properties file.
+ *
+ * @param visibleText of the element you want to fetch,
+ * it is not necessary to include the full path with the appPackage, Kranberry does this automatically.
+ * @return This method returns a boolean, which lets you decide what
+ * to do with the result of it (fail the test or try again, for example)
+ */
+fun BaseUi.waitUntilElementIsPresentByText(visibleText: String): Boolean {
+    Log.message("Waiting until visibleText '$visibleText' is present")
+    device.wait(Until.hasObject(By.text(visibleText)), timeout)
+    waitForDevice()
+    return elementIsPresentByText(visibleText)
+}
+
 /**
  * Implicitly waits for the device idle until the default timeout given in the kranberry.properties file.
  *
