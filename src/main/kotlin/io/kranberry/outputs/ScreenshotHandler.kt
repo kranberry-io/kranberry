@@ -27,7 +27,7 @@ object ScreenshotHandler {
     fun getTestResult(): String {
         return when (currentTestCaseId) {
             "" -> {
-                "$currentTestResult\n"
+                "---,$currentTestResult\n"
             }
             else -> "$currentTestCaseId,$currentTestResult\n"
         }
