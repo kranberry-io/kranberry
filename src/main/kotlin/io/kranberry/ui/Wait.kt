@@ -84,7 +84,12 @@ fun BaseUi.waitForDevice() {
 
 fun BaseUi.pageLoadingCompleted(): Boolean {
     Log.message("Waiting until '$progressbarClass' is gone")
-    device.wait(Until.gone(By.clazz(progressbarClass)), progressBarTimeout)
+
+    when {
+        elementIsPresentByClass(progressbarClass) -> {
+            device.wait(Until.gone(By.clazz(progressbarClass)), progressBarTimeout)
+        }
+    }
     return !elementIsPresentByClass(progressbarClass)
 }
 

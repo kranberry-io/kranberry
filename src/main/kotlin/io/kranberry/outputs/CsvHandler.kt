@@ -34,7 +34,7 @@ object CsvHandler {
     fun writeCsvResult() {
         if (!TestHandler.reportHasHeader) {
             csvResultFile()
-                .appendText("TEST_CLASS,TEST_METHOD,RESULT\n")
+                .appendText("sep=,\nTEST_CLASS,TEST_METHOD,TEST_ID,RESULT\n")
             TestHandler.reportHasHeader = true
         }
         csvResultFile()
