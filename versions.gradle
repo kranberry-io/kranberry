@@ -1,10 +1,8 @@
 ext {
     // sdk versions
-    targetApiVersion = 30
-    compileApiVersion = 30
+    targetApiVersion = 31
+    compileApiVersion = 31
     minApiVersion = 21
-    toolsVersion = "29.0.3"
-    ndkVersion = "21.1.6352462"
 
     // project dependencies versions
     kotlin_version = "1.6.0"

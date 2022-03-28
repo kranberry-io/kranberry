@@ -58,7 +58,6 @@ android {
     testBuildType "release"
 
     compileSdkVersion project.compileApiVersion
-    buildToolsVersion project.toolsVersion
 
     defaultConfig {
         minSdkVersion minApiVersion
