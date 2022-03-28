@@ -15,7 +15,6 @@ interface RunTestsPluginExtension {
 }
 
 class RunTestsPlugin : Plugin<Project> {
-    @ExperimentalStdlibApi
     override fun apply(project: Project) {
         val extension = project.extensions.create("kranberryTests", RunTestsPluginExtension::class.java)
         extension.run {
